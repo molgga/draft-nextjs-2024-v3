@@ -1,0 +1,14 @@
+.modal-box {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  max-width: 360px;
+}
+
+.header-bar {
+  display: flex;
+  padding: 10px;
+}
+.header-bar-aside {
+  flex: 1;
+}

@@ -1,0 +1,12 @@
+node_modules/**
+__temp__
+__tests__
+@types/**
+dist/**
+build/**
+public/**
+*.gen.ts
+.github
+.workflows
+src/shared/libs/jd-modal
+src/shared/libs/toast

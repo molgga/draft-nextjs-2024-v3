@@ -4,6 +4,9 @@ import config from '@repo/ui/tailwind.config';
 const webConfig = {
   ...config,
   presets: [config],
+  // content: ['./src/app/**/*.tsx', './src/**/ui/**/*.tsx'],
+  // content: ['./src/**/*.{ts,tsx}', '../../packages/ui/src/**/*.{ts,tsx}'],
+  // content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
