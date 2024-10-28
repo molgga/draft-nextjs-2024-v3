@@ -1,4 +1,6 @@
-## shadcn 설치
+## turborepo shadcn 설치
+
+- @see: https://matinkhani.medium.com/create-a-turborepo-with-nextjs-tailwindcss-shadcn-6e6ecfd52aea
 
 ```
 pnpm dlx create-turbo@latest
@@ -32,4 +34,9 @@ src/globals.css 생성
 위에 까지 한 후 다시 설치하면 설치가 됨
 
 npx shadcn@latest init
+```
+
+```
+pnpm dlx --filter ui shadcn@latest add button
+pnpm dlx shadcn@latest add button
 ```
