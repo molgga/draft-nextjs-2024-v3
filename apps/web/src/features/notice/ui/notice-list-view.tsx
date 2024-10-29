@@ -11,24 +11,13 @@ export function NoticeListView() {
   const formMethods = { getValues: () => ({ page: 1 }) }; // todo react-hook-forms
   const isEnabled = true;
 
-  const {
-    data: { list: noticeList = [], total: noticeTotal = 0 } = {},
-    isFetching,
-    isPending,
-    isError,
-  } = useQueryNoticeList({ ...formMethods.getValues() }, isEnabled);
-
-  console.log({
-    noticeList,
-    noticeTotal,
-    isFetching,
-    isPending,
-    isError,
-  });
+  const { data: { list: noticeList = [], total: noticeTotal = 0 } = {} } =
+    useQueryNoticeList({ ...formMethods.getValues() }, isEnabled);
 
   return (
     <div>
       notice list view
+      <div>noticeTotal: {noticeTotal}</div>
       {noticeList.map((m) => {
         return (
           <div key={m.id}>

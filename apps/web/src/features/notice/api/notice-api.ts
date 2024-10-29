@@ -30,7 +30,7 @@ export const getNoticeList = async (params: NoticeListReq) => {
  */
 export const getNoticeDetail = async (params: NoticeDetailReq) => {
   const { id } = params;
-  const url = `http://localhost:3000/api/mock/notic2e/${id}`;
+  const url = `http://localhost:3000/api/mock/notice/${id}`;
   const response = await fetchClient<NoticeDetailRes>(
     { url },
     {

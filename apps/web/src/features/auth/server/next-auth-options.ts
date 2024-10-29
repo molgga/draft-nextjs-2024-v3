@@ -32,8 +32,8 @@ export const createNextAuthOptions = (): NextAuthOptions => ({
         password: { label: '로그인 비밀번호' },
       },
       authorize: (credentials) => {
+        console.log('next-auth # authorize');
         const { username, password } = credentials || {};
-        console.log('next-auth # authorize:', credentials);
         if (Boolean(username) && Boolean(password)) {
           return {
             id: '_', // https://stackoverflow.com/questions/70990262/how-to-write-authorize-function-correctly-in-typescript-for-nextauthjs
