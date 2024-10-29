@@ -1,5 +1,5 @@
 import type { ForwardRefExoticComponent, RefAttributes } from 'react';
-import { Home, TriangleAlert, type LucideProps } from 'lucide-react';
+import { BookText, TriangleAlert, type LucideProps } from 'lucide-react';
 
 type IconComponent = ForwardRefExoticComponent<
   Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
@@ -25,7 +25,7 @@ export const createNaviList = (): {
     mainList: [
       {
         key: 'home',
-        icon: Home,
+        icon: BookText,
         title: '기능 테스트',
         list: [
           {

@@ -1,6 +1,8 @@
 'use client';
 import { type PropsWithChildren } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
+import { FullPanel } from '@web/shared/ui/panel/full-center-panel';
+import { ErrorBox } from './error-box';
 
 export function WrapErrorBoundary({ children }: PropsWithChildren) {
   return (
@@ -10,13 +12,11 @@ export function WrapErrorBoundary({ children }: PropsWithChildren) {
   );
 }
 
-function WrapErrorFallback() {
+function WrapErrorFallback({ error }: FallbackProps) {
+  console.log('WrapErrorFallback:', error);
   return (
-    <div>
-      <div>WrapErrorBoundary</div>
-      <div>
-        <div>error</div>
-      </div>
-    </div>
+    <FullPanel>
+      <ErrorBox />
+    </FullPanel>
   );
 }

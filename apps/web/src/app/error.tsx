@@ -1,5 +1,9 @@
 'use client';
 
+import { ErrorBox } from '@web/features/error/ui/error-box';
+import { FullContentLayout } from '@web/features/layout/ui/composition/full-content-layout';
+import { FullPanel } from '@web/shared/ui/panel/full-center-panel';
+
 type ErrorInstance = Error & {
   message?: string;
   digest?: string;
@@ -10,16 +14,12 @@ interface ErrorPageProps {
 }
 
 export default function ErrorPage({ error }: ErrorPageProps) {
-  console.log('#####################');
-  console.log('error:', error);
-  console.log('error message:', error?.message);
-  console.log('error digest:', error?.digest);
+  console.log('ErrorPage', error);
   return (
-    <div>
-      <div>Root ErrorPage</div>
-      <div>message: {error.message}</div>
-      <div>digest: {error.digest}</div>
-      <div>{JSON.stringify(error)}</div>
-    </div>
+    <FullContentLayout>
+      <FullPanel>
+        <ErrorBox />
+      </FullPanel>
+    </FullContentLayout>
   );
 }

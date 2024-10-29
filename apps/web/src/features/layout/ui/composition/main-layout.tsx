@@ -9,7 +9,9 @@ export function MainLayout({ children }: PropsWithChildren) {
     <SidebarProvider>
       <DefaultAside />
       <div className="ui-flex-1  ui-flex ui-flex-col">
-        <main className="ui-flex-1 ui-py-4 ui-px-10">{children}</main>
+        <main className="ui-relative ui-flex-1 ui-py-4 ui-px-10">
+          {children}
+        </main>
         <DefaultFooter />
       </div>
     </SidebarProvider>

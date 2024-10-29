@@ -23,6 +23,7 @@ import { Input } from '@ui/components/ui/input';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FullPanel } from '@web/shared/ui/panel/full-center-panel';
 import { useQueryLogin } from '../hooks/use-query-login';
 
 const loginScheme = z.object({
@@ -63,7 +64,7 @@ export default function LoginView() {
   };
 
   return (
-    <div className="ui-flex ui-h-screen ui-w-full ui-items-center ui-justify-center ui-px-4">
+    <FullPanel>
       <Card className="ui-mx-auto ui-max-w-sm ui-min-w-96">
         <Form {...loginForm}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -145,6 +146,6 @@ export default function LoginView() {
           </form>
         </Form>
       </Card>
-    </div>
+    </FullPanel>
   );
 }
