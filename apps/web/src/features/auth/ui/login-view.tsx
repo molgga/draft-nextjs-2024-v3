@@ -1,8 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import { toast } from 'react-toastify';
-import { Loader2 as IconPending, House as IconHome } from 'lucide-react';
+import { Loader2 as IconPending } from 'lucide-react';
 import { Button } from '@ui/components/ui/button';
 import {
   Card,
@@ -69,14 +68,7 @@ export default function LoginView() {
         <Form {...loginForm}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <CardHeader>
-              <CardTitle className="ui-text-2xl">
-                <Button variant="outline" size="icon" asChild>
-                  <Link href="/">
-                    <IconHome />
-                  </Link>
-                </Button>
-                <span className="ui-ml-2">로그인</span>
-              </CardTitle>
+              <CardTitle className="ui-text-2xl">로그인</CardTitle>
               <CardDescription className="ui-pt-2">
                 Draft NextJS 14 AppRouter + shadcn
               </CardDescription>
