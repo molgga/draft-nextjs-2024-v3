@@ -50,7 +50,6 @@ export const createNextAuthOptions = (): NextAuthOptions => ({
       console.log('next-auth # callbacks signIn');
       try {
         const authorizedUser = user as AuthorizedUser;
-
         // API 요청 및 확인
         const response = await new Promise<PublicUserInfo>((resolve) => {
           setTimeout(() => {
@@ -59,8 +58,12 @@ export const createNextAuthOptions = (): NextAuthOptions => ({
               userId: Math.ceil(Math.random() * 9999).toString(),
               userName: '테스터이름',
             });
-          });
+          }, 1000);
         });
+
+        if (authorizedUser.username !== 'testuser') {
+          throw new Error('일치하는 회원 정보가 없습니다.');
+        }
 
         if (response.accessToken) {
           // 로그인 성공 + 사용자 정보 중 노출 되어도(화면 표시 등) 상관없는 정보 추가

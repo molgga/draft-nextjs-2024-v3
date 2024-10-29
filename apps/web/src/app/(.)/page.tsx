@@ -1,5 +1,5 @@
-import { TestUiBox1 } from '@web/shared/ui/test-ui-box1';
 import { Button } from '@ui/components/ui/button';
+import { TestUiBox1 } from '@web/shared/ui/test-ui-box1';
 
 export default function Page() {
   return (

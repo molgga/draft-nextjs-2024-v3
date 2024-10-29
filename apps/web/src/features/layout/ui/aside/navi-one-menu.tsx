@@ -15,7 +15,7 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from '@ui/components/ui/collapsible';
-import { NaviMainVo } from '@web/features/layout/model/create-navi-list';
+import type { NaviMainVo } from '@web/features/layout/model/create-navi-list';
 
 export function NaviOneMenu({ model }: { model: NaviMainVo }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -29,7 +29,10 @@ export function NaviOneMenu({ model }: { model: NaviMainVo }) {
         <SidebarMenuItem>
           <CollapsibleTrigger asChild>
             <SidebarMenuButton asChild>
-              <button className="ui-flex ui-items-center ui-justify-between ui-px-4">
+              <button
+                type="button"
+                className="ui-flex ui-items-center ui-justify-between ui-px-4"
+              >
                 <model.icon />
                 <span className="ui-flex-1">{model.title}</span>
                 {isOpen ? (
@@ -47,7 +50,7 @@ export function NaviOneMenu({ model }: { model: NaviMainVo }) {
                 <SidebarMenuSub key={item.key}>
                   <SidebarMenuSubItem>
                     <SidebarMenuSubButton asChild>
-                      <Link href={item.href}>
+                      <Link prefetch={false} href={item.href}>
                         <span>{item.title}</span>
                       </Link>
                     </SidebarMenuSubButton>

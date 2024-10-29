@@ -15,12 +15,12 @@ import {
 export function randomRangeInt(min: number, max: number) {
   if (max < min) return 0;
   if (max === min) return max;
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  const cmin = Math.ceil(min);
+  const cmax = Math.floor(max);
+  return Math.floor(Math.random() * (cmax - cmin + 1)) + cmin;
 }
 
-export function randomizeFromSeeds(seeds: any[], min = 1, max = 1) {
+export function randomizeFromSeeds<T = unknown>(seeds: T[], min = 1, max = 1) {
   const len = getRange(min, max);
   const arr = [];
   const seedLen = seeds.length - 1;
@@ -35,7 +35,7 @@ export function getRange(min: number, max: number) {
   return randomRangeInt(min, max);
 }
 
-export function getRandomOneBy(seeds: any[]) {
+export function getRandomOneBy(seeds: unknown[]) {
   return randomizeFromSeeds(seeds, 1, 1)[0];
 }
 
@@ -44,11 +44,11 @@ export function getRandomTextId() {
 }
 
 export function getRandomWord(): string {
-  return randomizeFromSeeds(WORD_LIST, 1, 1)[0];
+  return randomizeFromSeeds<string>(WORD_LIST, 1, 1)[0];
 }
 
 export function getRandomWords(min = 1, max = 1): string[] {
-  return randomizeFromSeeds(WORD_LIST, min, max);
+  return randomizeFromSeeds<string>(WORD_LIST, min, max);
 }
 
 export function getRandomText(min = 1, max = 1) {
@@ -91,6 +91,6 @@ export function getRandomDateAt(min = 1546300800000, max = 0) {
   return getRange(min, max || Date.now());
 }
 
-export function getRandomDateYMD(min = 1546300800000, max = 0) {
+export function getRandomDateYMD() {
   return toFormat(getRandomDateAt(), { format: 'YYYY-MM-DD' });
 }

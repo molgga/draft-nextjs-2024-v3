@@ -1,6 +1,8 @@
 'use client';
 import { LogIn, LogOut } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Button } from '@ui/components/ui/button';
 import {
   Sidebar,
   SidebarContent,
@@ -10,7 +12,6 @@ import {
 } from '@ui/components/ui/sidebar';
 import { createNaviList } from '@web/features/layout/model/create-navi-list';
 import { useAuthUser } from '@web/features/auth/hooks/use-auth-user';
-import { Button } from '@ui/components/ui/button';
 import { NaviOneMenu } from './navi-one-menu';
 
 export function DefaultAside() {
@@ -31,7 +32,11 @@ export function DefaultAside() {
       <div style={{ position: 'absolute', bottom: '18px', right: '-30px' }}>
         <SidebarTrigger />
       </div>
-      <SidebarHeader>SidebarHeader</SidebarHeader>
+      <SidebarHeader>
+        <Link prefetch={false} href="/">
+          SidebarHeader
+        </Link>
+      </SidebarHeader>
       <SidebarContent>
         {naviList.mainList.map((main) => {
           return <NaviOneMenu key={main.key} model={main} />;
@@ -48,7 +53,7 @@ export function DefaultAside() {
           </div>
         ) : (
           <div className="ui-flex ui-items-center ui-justify-between ui-p-2 ui-text-sm">
-            <span className="ui-flex-1"></span>
+            <span className="ui-flex-1">&nbsp;</span>
             <Button variant="outline" size="xs" onClick={handleLogin}>
               <LogIn />
               <span className="ui-flex-1">로그인</span>

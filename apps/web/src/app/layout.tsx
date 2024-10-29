@@ -6,6 +6,7 @@ import { Noto_Sans_KR as NotoSansKr } from 'next/font/google';
 import { AuthProvider } from '@web/providers/auth-provider';
 import { ModalProvider } from '@web/providers/modal-provider';
 import { QueryProvider } from '@web/providers/query-provider';
+import { ToastProvider } from '@web/providers/toast-provider';
 
 export const metadata: Metadata = {
   title: '기본 타이틀!',
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <AuthProvider>
           <QueryProvider>
             <ModalProvider>{children}</ModalProvider>
+            <ToastProvider />
           </QueryProvider>
         </AuthProvider>
       </body>

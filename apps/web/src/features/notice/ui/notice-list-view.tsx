@@ -29,21 +29,11 @@ export function NoticeListView() {
   return (
     <div>
       notice list view
-      {/* <div>
-        <Link href="/notice/detail/11111">11111</Link>
-        <br />
-        <Link href="/notice/detail/22222">22222</Link>
-        <br />
-        <Link href="/notice/detail/33333">33333</Link>
-        <br />
-        <Link href="/notice/detail/">empty</Link>
-        <br />
-        <Link href="/notice/detail/unknown">unknown</Link>
-      </div> */}
       {noticeList.map((m) => {
         return (
           <div key={m.id}>
             <Link
+              prefetch={false}
               href={`/notice/detail/${m.id}`}
               className="flex p-2 hover:bg-gray-100"
             >
@@ -53,7 +43,9 @@ export function NoticeListView() {
         );
       })}
       <div>
-        <Link href="/notice/create">글쓰기</Link>
+        <Link prefetch={false} href="/notice/create">
+          글쓰기
+        </Link>
       </div>
     </div>
   );
@@ -74,15 +66,25 @@ export function NoticeListViewTestFetch() {
     <div>
       notice list view
       <div>
-        <Link href="/notice/detail/11111">11111</Link>
+        <Link prefetch={false} href="/notice/detail/11111">
+          11111
+        </Link>
         <br />
-        <Link href="/notice/detail/22222">22222</Link>
+        <Link prefetch={false} href="/notice/detail/22222">
+          22222
+        </Link>
         <br />
-        <Link href="/notice/detail/33333">33333</Link>
+        <Link prefetch={false} href="/notice/detail/33333">
+          33333
+        </Link>
         <br />
-        <Link href="/notice/detail/">empty</Link>
+        <Link prefetch={false} href="/notice/detail/">
+          empty
+        </Link>
         <br />
-        <Link href="/notice/detail/unknown">unknown</Link>
+        <Link prefetch={false} href="/notice/detail/unknown">
+          unknown
+        </Link>
       </div>
     </div>
   );

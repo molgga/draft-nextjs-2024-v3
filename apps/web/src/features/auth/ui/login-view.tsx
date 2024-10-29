@@ -1,129 +1,142 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { signIn } from 'next-auth/react';
-import Link from 'next/link';
+import { toast } from 'react-toastify';
+import { Loader2 } from 'lucide-react';
+import { Button } from '@ui/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@ui/components/ui/card';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@ui/components/ui/form';
+import { Input } from '@ui/components/ui/input';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryLogin } from '../hooks/use-query-login';
+
+const loginScheme = z.object({
+  username: z.string().min(1, '아이디를 입력하세요.'),
+  password: z.string().min(1, '비밀번호를 입력하세요.'),
+});
+
+type LoginScheme = z.infer<typeof loginScheme>;
 
 export default function LoginView() {
-  // const router = useRouter();
+  const actionLogin = useQueryLogin();
   const searchParams = useSearchParams();
   const callbackUrl = decodeURIComponent(
     searchParams.get('callbackUrl') || '/'
   );
 
-  const login = async () => {
-    console.log('login start');
-    const result = await signIn('credentials', {
-      redirect: false,
+  const loginForm = useForm<LoginScheme>({
+    resolver: zodResolver(loginScheme),
+    defaultValues: {
       username: 'testuser',
-      password: 'test1234',
-    });
+      password: 'test1234$#@!',
+    },
+  });
+  const { register, handleSubmit } = loginForm;
+
+  const onSubmit = async (payload: LoginScheme) => {
+    console.log('login start');
+    const { username, password } = payload;
+    const result = await actionLogin.mutateAsync({ username, password });
+    console.log(result);
     if (result && result.ok && !result.error) {
       window.location.href = callbackUrl;
     } else {
-      console.log(result?.error || 'error');
+      toast.error(result?.error || 'error', {
+        autoClose: 3000,
+      });
     }
   };
 
-  const onSubmit = (evt: React.FormEvent) => {
-    evt.preventDefault();
-    void login();
-  };
-
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <Link
-          prefetch={false}
-          href="/"
-          className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-        >
-          LOGO
-        </Link>
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              로그인 계정을 입력하세요
-            </h1>
-            <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  로그인 ID
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="testuser"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  비밀번호
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
-              </div>
-              {/*               
-              <div className="flex items-center justify-between">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="remember"
-                      aria-describedby="remember"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="remember"
-                      className="text-gray-500 dark:text-gray-300"
-                    >
-                      Remember me
-                    </label>
-                  </div>
+    <div className="ui-flex ui-h-screen ui-w-full ui-items-center ui-justify-center ui-px-4">
+      <Card className="ui-mx-auto ui-max-w-sm ui-min-w-96">
+        <Form {...loginForm}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <CardHeader>
+              <CardTitle className="ui-text-2xl">로그인</CardTitle>
+              <CardDescription className="ui-pt-2">
+                Draft NextJS 14 AppRouter + shadcn
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="ui-grid ui-gap-4">
+                <div className="ui-grid ui-gap-2">
+                  <FormField
+                    control={loginForm.control}
+                    name="username"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>ID</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="text"
+                            placeholder="로그인 아이디"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Forgot password?
-                </a>
-              </div> */}
 
-              <button
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                로그인
-              </button>
+                <div className="ui-grid ui-gap-2">
+                  <FormField
+                    control={loginForm.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>비밀번호</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="password"
+                            placeholder="비밀번호"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-              {/*               
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don’t have an account yet? {'  '}
-                <a
-                  href="#"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                <Button
+                  type="submit"
+                  className="ui-w-full"
+                  disabled={actionLogin.isPending}
                 >
-                  회원가입
-                </a>
-              </p> */}
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+                  {Boolean(actionLogin.isPending) && (
+                    <Loader2 className="ui-mr-2 ui-h-4 ui-w-4 ui-animate-spin" />
+                  )}
+                  Login
+                </Button>
+                {/*               
+              <Button variant="outline" className="ui-w-full">
+                Login with Google
+              </Button>
+               */}
+              </div>
+              <div className="ui-mt-4 ui-text-center ui-text-sm">
+                로그인 테스트 화면 testuser 외에는 오류
+              </div>
+            </CardContent>
+          </form>
+        </Form>
+      </Card>
+    </div>
   );
 }

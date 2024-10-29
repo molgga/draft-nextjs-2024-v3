@@ -1,13 +1,5 @@
-import {
-  Calendar,
-  Home,
-  Inbox,
-  LucideProps,
-  Search,
-  Settings,
-  TriangleAlert,
-} from 'lucide-react';
-import { ForwardRefExoticComponent, RefAttributes } from 'react';
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
+import { Home, TriangleAlert, type LucideProps } from 'lucide-react';
 
 type IconComponent = ForwardRefExoticComponent<
   Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
