@@ -10,7 +10,11 @@ export async function POST(request: NextRequest) {
   await delay(100 + Math.random() * 1111);
 
   if (content === 'err') {
-    const err = { status: 400, statusText: 'test error' };
+    console.log(1);
+    const err = {
+      status: 400,
+      message: decodeURIComponent('이것은 API 에서 보내주는 오류 메세지'),
+    };
     return NextResponse.json({ error: err }, err);
   }
 

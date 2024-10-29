@@ -1,18 +1,9 @@
 import { useQuery, keepPreviousData, useMutation } from '@tanstack/react-query';
-// import {
-//   dehydrate,
-//   keepPreviousData,
-//   QueryClient,
-//   useMutation,
-//   useQuery,
-// } from '@tanstack/react-query';
+import { useToast } from '@ui/hooks/use-toast';
 import * as NoticeApi from '@web/features/notice/api/notice-api';
-import { toNoticeItem } from '@web/features/notice/model/notice-item.model';
 import type { NoticeListReq } from '@web/features/notice/types';
-
-export const toQueryKeyWithParams = <T = unknown>(base: string, params?: T) => {
-  return [base, { ...params }];
-};
+import { toNoticeItem } from '@web/features/notice/model/notice-item.model';
+import { toQueryKeyWithParams } from '@web/shared/api';
 
 /**
  * 목록 가져오기
@@ -34,21 +25,16 @@ export function useQueryNoticeList(params: NoticeListReq, enabled = true) {
 }
 
 export function useQueryNoticeCreate() {
+  const { toast: toastBox } = useToast();
   return useMutation({
-    mutationKey: toQueryKeyWithParams('notice-create'),
     mutationFn: NoticeApi.createNotice,
     onSuccess: () => {
-      // toast.success('저장되었습니다.', {
-      //   autoClose: 1500,
-      //   hideProgressBar: true,
-      // });
       console.log('success');
-    },
-    onError: (err) => {
-      // toast.error(err?.message || '처리하지 못했습니다.', {
-      //   autoClose: 3000,
-      // });
-      console.log('error', err);
+      toastBox({
+        title: '공지사항',
+        description: '저장되었습니다.',
+        duration: 2000,
+      });
     },
   });
 }

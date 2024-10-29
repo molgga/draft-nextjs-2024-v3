@@ -1,6 +1,6 @@
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+'use client';
+import { Toaster } from '@ui/components/ui/toaster';
 
 export function ToastProvider() {
-  return <ToastContainer autoClose={2000} />;
+  return <Toaster />;
 }

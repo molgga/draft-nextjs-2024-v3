@@ -5,6 +5,7 @@ import type {
   URLSearchParamsType,
 } from '@web/shared/api/types';
 import { FetchMethod, FetchCache } from '@web/shared/api/types';
+import { throwErrorResponse, toSuccessResponse } from './fetch-client-utils';
 
 export const fetchClient = async <T>(
   config: RequestConfig,
@@ -43,38 +44,10 @@ export const fetchClient = async <T>(
   });
 
   const { status, statusText } = response;
-  try {
-    if (status !== 200) {
-      return toErrorResponse({ status, statusText });
-    }
-    return toSuccessResponse<T>((await response.json()) as T);
-  } catch (err) {
-    return toErrorResponse({
-      status: 500,
-      statusText: (err as { message: string })?.message,
-    });
+  if (status !== 200) {
+    const errBody = (await response.json()) as { error?: { message?: string } };
+    const message = errBody?.error?.message || statusText;
+    throwErrorResponse({ status, message }); // tanstack-query 사용하고 있어서 throw 처리 방식으로 사용
   }
+  return toSuccessResponse<T>((await response.json()) as T);
 };
-
-function toSuccessResponse<T = unknown>(data: T) {
-  return {
-    data: data || null,
-    error: null,
-  };
-}
-
-function toErrorResponse({
-  status,
-  statusText,
-}: {
-  status?: number;
-  statusText?: string;
-}) {
-  return {
-    data: null,
-    error: {
-      status: status || 500,
-      message: statusText || 'Error',
-    },
-  };
-}

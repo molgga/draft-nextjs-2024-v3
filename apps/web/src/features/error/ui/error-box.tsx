@@ -1,5 +1,6 @@
 import { Button } from '@ui/components/ui/button';
 import { TriangleAlert } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface ErrorBoxProps {
   icon?: React.ReactNode;
@@ -15,6 +16,12 @@ export function getErrorIconDefaultAttrs() {
 }
 
 export function ErrorBox({ icon, title, message }: ErrorBoxProps) {
+  const router = useRouter();
+
+  const handleBack = () => {
+    router.back();
+  };
+
   return (
     <div className="ui-text-center">
       <div className="ui-flex ui-justify-center">
@@ -50,7 +57,15 @@ export function ErrorBox({ icon, title, message }: ErrorBoxProps) {
       </div>
 
       <div className="ui-flex ui-justify-center ui-mt-6">
-        <Button size="sm" variant="outline" asChild>
+        <Button
+          className="ui-mx-1"
+          size="sm"
+          variant="outline"
+          onClick={handleBack}
+        >
+          뒤로가기
+        </Button>
+        <Button className="ui-mx-1" size="sm" variant="outline" asChild>
           <a href="/">홈으로</a>
         </Button>
       </div>

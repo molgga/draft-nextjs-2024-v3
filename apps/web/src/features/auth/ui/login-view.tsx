@@ -1,6 +1,5 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { toast } from 'react-toastify';
 import { Loader2 as IconPending } from 'lucide-react';
 import { Button } from '@ui/components/ui/button';
 import {
@@ -19,8 +18,8 @@ import {
   FormMessage,
 } from '@ui/components/ui/form';
 import { Input } from '@ui/components/ui/input';
-import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FullPanel } from '@web/shared/ui/panel/full-center-panel';
 import { useQueryLogin } from '../hooks/use-query-login';
@@ -46,19 +45,13 @@ export default function LoginView() {
       password: 'test1234$#@!',
     },
   });
-  const { handleSubmit } = loginForm;
 
   const onSubmit = async (payload: LoginScheme) => {
     console.log('login start');
     const { username, password } = payload;
     const result = await actionLogin.mutateAsync({ username, password });
-    console.log(result);
     if (result && result.ok && !result.error) {
       window.location.href = callbackUrl;
-    } else {
-      toast.error(result?.error || 'error', {
-        autoClose: 3000,
-      });
     }
   };
 
@@ -66,7 +59,7 @@ export default function LoginView() {
     <FullPanel>
       <Card className="ui-mx-auto ui-max-w-sm ui-min-w-96">
         <Form {...loginForm}>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={loginForm.handleSubmit(onSubmit)}>
             <CardHeader>
               <CardTitle className="ui-text-2xl">로그인</CardTitle>
               <CardDescription className="ui-pt-2">

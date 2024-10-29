@@ -8,20 +8,9 @@ import type {
   NoticeListRes,
 } from '@web/features/notice/types';
 
-export const getNoticeDetail = async (params: NoticeDetailReq) => {
-  const { id } = params;
-  const url = `http://localhost:3000/api/mock/notice/${id}`;
-  const response = await fetchClient<NoticeDetailRes>(
-    { url },
-    {
-      method: FetchMethod.GET,
-      // cache: FetchCache.NoStore,
-      next: { revalidate: 1 },
-    }
-  );
-  return response;
-};
-
+/**
+ * 공지사항 목록 가져오기
+ */
 export const getNoticeList = async (params: NoticeListReq) => {
   console.log('getNoticeList', params);
   const url = `http://localhost:3000/api/mock/notice/list`;
@@ -36,6 +25,25 @@ export const getNoticeList = async (params: NoticeListReq) => {
   return response;
 };
 
+/**
+ * 공지사항 상세 가져오기
+ */
+export const getNoticeDetail = async (params: NoticeDetailReq) => {
+  const { id } = params;
+  const url = `http://localhost:3000/api/mock/notic2e/${id}`;
+  const response = await fetchClient<NoticeDetailRes>(
+    { url },
+    {
+      method: FetchMethod.GET,
+      next: { revalidate: 1 },
+    }
+  );
+  return response;
+};
+
+/**
+ * 공지사항 쓰기
+ */
 export const createNotice = async (params: NoticeCreateReq) => {
   console.log('createNotice', params);
   const url = `http://localhost:3000/api/mock/notice/create`;

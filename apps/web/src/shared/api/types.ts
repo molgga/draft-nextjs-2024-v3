@@ -2,7 +2,11 @@
  * API 클라이언트 meta 타입 정의
  */
 export interface QueryMetaVo {
-  isRequireAuthModal?: boolean; // true = 에러일 때 로그인 모달 열지 여부
+  requireAuthModal?: boolean; // true = 에러일 때 로그인 모달 열지 여부
+
+  disableGlobalErrorHandler?: boolean; // 전역 에러 핸들러 처리 안하기(직접 핸들링)
+  globalErrorTitle?: string;
+  globalErrorMessage?: string;
 }
 
 export type URLSearchParamsType =

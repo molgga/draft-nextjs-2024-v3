@@ -6,7 +6,7 @@ export const throwError = (message: string | number = 'Error') => {
   throw new UnknownError(message.toString());
 };
 
-export const ErrorCode = Object.freeze({
+export const ErrorDigestCode = Object.freeze({
   BadRequest: 'BadRequest',
   NotFound: 'NotFound',
   Unauthorized: 'Unauthorized',
@@ -24,13 +24,13 @@ export class UnknownError extends CustomError {
 }
 
 export class BadRequestError extends CustomError {
-  digest = ErrorCode.BadRequest;
+  digest = ErrorDigestCode.BadRequest;
 }
 
 export class NotFoundError extends CustomError {
-  digest = ErrorCode.NotFound;
+  digest = ErrorDigestCode.NotFound;
 }
 
 export class UnauthorizedError extends CustomError {
-  digest = ErrorCode.Unauthorized;
+  digest = ErrorDigestCode.Unauthorized;
 }

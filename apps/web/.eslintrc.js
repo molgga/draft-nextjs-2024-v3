@@ -11,7 +11,13 @@ module.exports = {
     'react/hook-use-state': 'off',
     'react/jsx-sort-props': 'off',
     'unicorn/filename-case': 'off',
-    '@typescript-eslint/no-unused-vars': 1,
+    'tsdoc/syntax': [
+      'warn',
+      {
+        tagDefinitions: [{ tagName: '@TODO', syntaxKind: 'blockTag' }],
+      },
+    ],
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-unnecessary-condition': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-confusing-void-expression': 'off',
