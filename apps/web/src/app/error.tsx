@@ -15,7 +15,7 @@ interface ErrorPageProps {
 }
 
 export default function ErrorPage({ error }: ErrorPageProps) {
-  // console.log('ErrorPage', error);
+  console.log('ErrorPage');
   if (error.digest === ErrorDigestCode.NotFound) {
     console.log('#ErrorPage ', ErrorDigestCode.NotFound);
   }

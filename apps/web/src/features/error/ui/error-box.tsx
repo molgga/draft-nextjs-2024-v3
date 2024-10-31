@@ -1,6 +1,7 @@
-import { Button } from '@ui/components/ui/button';
-import { TriangleAlert } from 'lucide-react';
+'use client';
 import { useRouter } from 'next/navigation';
+import { TriangleAlert } from 'lucide-react';
+import { Button } from '@ui/components/ui/button';
 
 interface ErrorBoxProps {
   icon?: React.ReactNode;
