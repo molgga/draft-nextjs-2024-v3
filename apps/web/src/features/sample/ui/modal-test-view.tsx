@@ -1,4 +1,5 @@
 'use client';
+import { Button } from '@ui/components/ui/button';
 import { useSampleModalA } from '@web/features/sample/hooks/use-sample-modal-a';
 import {
   PageActiveKey,
@@ -10,7 +11,7 @@ export function ModalTestView() {
 
   const modalA = useSampleModalA();
 
-  const onOpen1 = () => {
+  const handleOpenModal = () => {
     modalA.open({ testPass: new Date().toLocaleString() });
   };
 
@@ -20,12 +21,9 @@ export function ModalTestView() {
 
   return (
     <div>
-      <h1>Sample!!!!!!!!!!!!!</h1>
-      <div>
-        <button onClick={onOpen1} type="button">
-          onOpen1
-        </button>
-      </div>
+      <Button type="button" onClick={handleOpenModal}>
+        OpenModal
+      </Button>
     </div>
   );
 }

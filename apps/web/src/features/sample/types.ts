@@ -1,4 +1,5 @@
 export interface SampleModalData {
+  title?: string;
   testPass?: string;
 }
 

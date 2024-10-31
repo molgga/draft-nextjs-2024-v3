@@ -4,7 +4,7 @@ export default function Page() {
   console.log('promotion page a');
   return (
     <div>
-      promotion page A
+      <div>promotion page A</div>
       <PromotionTestView />
     </div>
   );

@@ -34,23 +34,23 @@ export const createNaviList = (): {
             href: '/brand',
           },
           {
+            key: 'notice',
+            title: '게시판',
+            href: '/notice/list',
+          },
+          {
             key: 'sample-modal',
             title: '모달',
             href: '/sample/modal',
           },
           {
-            key: 'notice',
-            title: '게시판 CRUD',
-            href: '/notice/list',
-          },
-          {
             key: 'promotion-a',
-            title: 'promotion a',
+            title: '테스트 페이지 A',
             href: '/promotion/a',
           },
           {
             key: 'promotion-b',
-            title: 'promotion b',
+            title: '테스트 페이지 B',
             href: '/promotion/b',
           },
         ],
