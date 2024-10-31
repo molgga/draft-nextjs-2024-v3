@@ -8,7 +8,7 @@ import type {
 } from '../types';
 
 /**
- * [!중요] next-auth 로그인 설정
+ * next-auth 로그인 설정
  * 로그인 기능 처리와 서버 세션 정보를 받기 위한 옵션(설정)
  *
  *  - app/api/auth/[...nextauth] 에서 NextAuth 를 생성한다.
