@@ -11,6 +11,7 @@ module.exports = {
     'react/hook-use-state': 'off',
     'react/jsx-sort-props': 'off',
     'unicorn/filename-case': 'off',
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'tsdoc/syntax': [
       'warn',
       {

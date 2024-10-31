@@ -10,6 +10,16 @@ module.exports = {
     },
   },
 
+  compiler: {
+    emotion: {},
+    // ...toBuildProduction({
+    //   removeConsole: {
+    //     // exclude: ['error'],
+    //     exclude: ['error', 'warn', 'info'],
+    //   },
+    // }),
+  },
+
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.alias['chalk'] = false;
