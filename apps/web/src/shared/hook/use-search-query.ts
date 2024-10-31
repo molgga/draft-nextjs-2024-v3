@@ -4,6 +4,7 @@ export const useSearchQuery = <T = Record<string, unknown>>() => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  // const searchParams = {} as any;
 
   const updateQuery = (record: T) => {
     const addRecord: Record<string, string> = {};
@@ -17,7 +18,7 @@ export const useSearchQuery = <T = Record<string, unknown>>() => {
       ...Object.fromEntries(searchParams),
       ...addRecord,
     }).toString();
-    router.push(`${pathname}?${queryString}`);
+    router.replace(`${pathname}?${queryString}`);
   };
 
   return {

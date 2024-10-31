@@ -1,10 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useLayoutActiveEffect } from '@web/features/layout/hook/use-layout-active-effect';
+import {
+  PageActiveKey,
+  useLayoutActiveEffect,
+} from '@web/features/layout/hook/use-layout-active-effect';
 
 export function NoticeDetailView() {
-  useLayoutActiveEffect('notice');
+  console.log('NoticeDetailView');
+  useLayoutActiveEffect(PageActiveKey.Notice);
 
   const dt = new Date().toLocaleString('ko-KR');
   console.log('notice-detail-view', dt);

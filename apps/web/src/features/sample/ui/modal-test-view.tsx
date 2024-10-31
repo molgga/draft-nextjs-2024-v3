@@ -7,6 +7,7 @@ import {
 } from '@web/features/layout/hook/use-layout-active-effect';
 
 export function ModalTestView() {
+  console.log('ModalTestView');
   useLayoutActiveEffect(PageActiveKey.SampleModal);
 
   const modalA = useSampleModalA();

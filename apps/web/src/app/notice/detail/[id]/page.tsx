@@ -1,4 +1,3 @@
-import { WrapErrorBoundary } from '@web/features/error/ui/wrap-error-boundary';
 import { getNoticeDetail } from '@web/features/notice/api/notice-api';
 import { NoticeDetailView } from '@web/features/notice/ui/notice-detail-view';
 import type { AppRouterPageProps } from '@web/shared/types';
@@ -18,9 +17,8 @@ export default async function Page({ params }: AppRouterPageProps<'id'>) {
   console.log('@@@@@@@@@@@@@@@@@@@@@@@@@ notice page');
   const id = params?.id;
   const response = await getNoticeDetail({ id });
-
   return (
-    <WrapErrorBoundary>
+    <>
       <div>notice page</div>
       <br />
       <div>now: {Date.now()}</div>
@@ -36,6 +34,6 @@ export default async function Page({ params }: AppRouterPageProps<'id'>) {
       <div>
         <NoticeDetailView />
       </div>
-    </WrapErrorBoundary>
+    </>
   );
 }

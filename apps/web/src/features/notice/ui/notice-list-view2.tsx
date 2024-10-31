@@ -1,4 +1,5 @@
 'use client';
+import { useCallback } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import {
@@ -12,10 +13,10 @@ import {
 import { Form, FormField, FormItem } from '@ui/components/ui/form';
 import { Input } from '@ui/components/ui/input';
 import { Button } from '@ui/components/ui/button';
-import { useLayoutActiveEffect } from '@web/features/layout/hook/use-layout-active-effect';
 import { JustifyPanel } from '@web/widgets/panel/justify-panel';
 import { ListPagination } from '@web/widgets/pagination/list-pagination';
 import { useSearchQuery } from '@web/shared/hook/use-search-query';
+import { useLayoutActiveEffect } from '@web/features/layout/hook/use-layout-active-effect';
 import { PageTitle } from '@web/shared/ui/page-title';
 import type { NoticeItemModel } from '../model/notice-item.model';
 
@@ -38,11 +39,17 @@ export function NoticeListView2({ list, total }: NoticeListView2Props) {
   const noticeTotal = total || 0;
 
   const { searchParams, updateQuery } = useSearchQuery<SearchFormSchema>();
+
+  const getRouteQueries = useCallback(() => {
+    const page = Number(searchParams.get('page')) || 1;
+    const size = Number(searchParams.get('size')) || 10;
+    const searchText = searchParams.get('searchText') || '';
+    return { page, size, searchText };
+  }, [searchParams]);
+
   const formMethods = useForm<SearchFormSchema>({
     defaultValues: {
-      page: Number(searchParams.get('page')) || 1,
-      size: Number(searchParams.get('size')) || 1,
-      searchText: searchParams.get('searchText') || '',
+      ...getRouteQueries(),
     },
   });
 
@@ -146,6 +153,8 @@ export function NoticeListView2({ list, total }: NoticeListView2Props) {
           </TableBody>
         </Table>
       )}
+
+      {JSON.stringify(formValues)}
 
       <JustifyPanel>
         <ListPagination

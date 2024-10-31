@@ -6,6 +6,7 @@ import {
 } from '@web/features/layout/hook/use-layout-active-effect';
 
 export default function BrandView() {
+  console.log('BrandView');
   useLayoutActiveEffect(PageActiveKey.Brand);
   const authUser = useAuthUser();
 

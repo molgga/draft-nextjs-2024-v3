@@ -14,6 +14,7 @@ export function GET(
 
   const id = Number(params?.id);
   if (!id) {
+    // id 0 === not found
     const err = { status: 404, statusText: 'Not found error' };
     return NextResponse.json({ error: err }, err);
   }
