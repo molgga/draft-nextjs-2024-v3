@@ -32,6 +32,7 @@ const loginScheme = z.object({
 type LoginScheme = z.infer<typeof loginScheme>;
 
 export default function LoginView() {
+  console.log('LoginView');
   const actionLogin = useQueryLogin();
   const searchParams = useSearchParams();
   const callbackUrl = decodeURIComponent(

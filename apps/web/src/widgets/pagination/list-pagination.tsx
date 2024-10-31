@@ -1,4 +1,3 @@
-import type { SyntheticEvent } from 'react';
 import {
   Pagination,
   PaginationContent,
@@ -7,6 +6,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@ui/components/ui/pagination';
+import { withEventPrevent } from '@web/shared/util/react/with-event-prevent';
 import type { PaginationConfig } from './types';
 import { toPagination } from './to-pagination';
 
@@ -22,13 +22,6 @@ interface ListPaginationProps extends PaginationConfig {
   // onPagingLast?: (page: number) => void;
   toHref?: (params: { paging: number }) => string;
 }
-
-const withPrevent = (fn: () => void) => {
-  return (evt: SyntheticEvent) => {
-    evt.preventDefault();
-    fn();
-  };
-};
 
 export function ListPagination({
   page,
@@ -54,7 +47,9 @@ export function ListPagination({
           <PaginationPrevious
             size="sm"
             href={toHref ? toHref({ paging: pagination.expectPrev }) : '#'}
-            onClick={withPrevent(() => onPagingPrev?.(pagination.expectPrev))}
+            onClick={withEventPrevent(() =>
+              onPagingPrev?.(pagination.expectPrev)
+            )}
           />
         </PaginationItem>
         {pagination.pageRange.map((paging) => {
@@ -64,7 +59,7 @@ export function ListPagination({
                 size="sm"
                 isActive={paging === page}
                 href={toHref ? toHref({ paging }) : '#'}
-                onClick={withPrevent(() => onPaging?.(paging))}
+                onClick={withEventPrevent(() => onPaging?.(paging))}
               >
                 {paging}
               </PaginationLink>
@@ -75,7 +70,9 @@ export function ListPagination({
           <PaginationNext
             size="sm"
             href={toHref ? toHref({ paging: pagination.expectNext }) : '#'}
-            onClick={withPrevent(() => onPagingNext?.(pagination.expectNext))}
+            onClick={withEventPrevent(() =>
+              onPagingNext?.(pagination.expectNext)
+            )}
           />
         </PaginationItem>
       </PaginationContent>

@@ -46,7 +46,7 @@ export function DefaultAside() {
         {authUser.isLogined ? (
           <div className="ui-flex ui-items-center ui-justify-between ui-p-2 ui-text-sm">
             <span className="ui-flex-1">{authUser.sessionUser.userName}</span>
-            <Button variant="outline" size="xs" onClick={handleLogout}>
+            <Button variant="outline" size="sm" onClick={handleLogout}>
               <LogOut />
               로그아웃
             </Button>
@@ -54,7 +54,7 @@ export function DefaultAside() {
         ) : (
           <div className="ui-flex ui-items-center ui-justify-between ui-p-2 ui-text-sm">
             <span className="ui-flex-1">&nbsp;</span>
-            <Button variant="outline" size="xs" onClick={handleLogin}>
+            <Button size="sm" onClick={handleLogin}>
               <LogIn />
               <span className="ui-flex-1">로그인</span>
             </Button>

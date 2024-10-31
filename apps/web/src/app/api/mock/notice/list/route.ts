@@ -11,10 +11,15 @@ import { toQuerySearchParams } from '@web/shared/util/search/to-query-search-par
 export function GET(request: NextRequest) {
   console.log('!!!!!!!!!!!!! API:', request.url);
   const query = toQuerySearchParams(request.nextUrl.searchParams);
-  return NextResponse.json({
-    meta: { ...query },
-    total: 125,
-    list: Array.from(Array(10)).map(() => {
+  let total = 0;
+  let list: unknown[] = [];
+  if (query?.searchText === 'empty') {
+    list = [];
+  } else if (query?.searchText === 'error') {
+    throw new Error('error!');
+  } else {
+    total = 123;
+    list = Array.from(Array(10)).map(() => {
       return {
         id: getRandomInt(1, 99999),
         title: getRandomText(3, 10),
@@ -23,6 +28,12 @@ export function GET(request: NextRequest) {
         date: getRandomDateYMD(),
         category: getRandomWord(),
       };
-    }),
+    });
+  }
+
+  return NextResponse.json({
+    meta: { ...query },
+    total,
+    list,
   });
 }
