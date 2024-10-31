@@ -1,5 +1,4 @@
 'use client';
-import { useCallback } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import {
@@ -13,13 +12,17 @@ import {
 import { Form, FormField, FormItem } from '@ui/components/ui/form';
 import { Input } from '@ui/components/ui/input';
 import { Button } from '@ui/components/ui/button';
-import { useQueryNoticeList } from '@web/features/notice/hooks/use-query-notice';
 import { useLayoutActiveEffect } from '@web/features/layout/hook/use-layout-active-effect';
 import { JustifyPanel } from '@web/widgets/panel/justify-panel';
 import { ListPagination } from '@web/widgets/pagination/list-pagination';
 import { useSearchQuery } from '@web/shared/hook/use-search-query';
-import { useQueryGeneralShowState } from '@web/shared/hook/use-query-general-show-state';
 import { PageTitle } from '@web/shared/ui/page-title';
+import type { NoticeItemModel } from '../model/notice-item.model';
+
+interface NoticeListView2Props {
+  list?: NoticeItemModel[];
+  total?: number;
+}
 
 interface SearchFormSchema {
   page: number;
@@ -27,39 +30,31 @@ interface SearchFormSchema {
   searchText: string;
 }
 
-export function NoticeListView() {
+export function NoticeListView2({ list, total }: NoticeListView2Props) {
   console.log('NoticeListView');
   useLayoutActiveEffect('notice');
 
+  const noticeList = list || [];
+  const noticeTotal = total || 0;
+
   const { searchParams, updateQuery } = useSearchQuery<SearchFormSchema>();
-
-  const getRouteQueries = useCallback(() => {
-    const page = Number(searchParams.get('page')) || 1;
-    const size = Number(searchParams.get('size')) || 10;
-    const searchText = searchParams.get('searchText') || '';
-    return { page, size, searchText };
-  }, [searchParams]);
-
   const formMethods = useForm<SearchFormSchema>({
-    defaultValues: { ...getRouteQueries() },
+    defaultValues: {
+      page: Number(searchParams.get('page')) || 1,
+      size: Number(searchParams.get('size')) || 1,
+      searchText: searchParams.get('searchText') || '',
+    },
   });
 
   const formValues = formMethods.getValues();
 
-  const {
-    isFetching,
-    isPending,
-    isError,
-    data: queryData,
-  } = useQueryNoticeList({ ...formValues });
-  const { list: noticeList = [], total: noticeTotal = 0 } = queryData || {};
-
-  const showState = useQueryGeneralShowState({
-    isFetching,
-    isPending,
-    isError,
-    list: noticeList,
-  });
+  const showState = (() => {
+    const showList = noticeList.length > 0;
+    return {
+      showList,
+      showEmpty: !showList,
+    };
+  })();
 
   const handlePaging = (page: number) => {
     console.log('handlePaging', page);
@@ -87,7 +82,7 @@ export function NoticeListView() {
 
   return (
     <div>
-      <PageTitle title="@tanstack/react-query 사용 방식" />
+      <PageTitle title="server fetch 방식" />
 
       <Form {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -115,19 +110,11 @@ export function NoticeListView() {
                 </Button>
               </div>
             )}
-
-            {Boolean(showState.showLoadingIndicate) && (
-              <div className="ui-ml-1">indicate loading: 목록이 있을때</div>
-            )}
           </div>
         </form>
       </Form>
 
-      {Boolean(showState.showLoadingList) && (
-        <div>skeleton loading: 목록이 비어있을때</div>
-      )}
-
-      {/* {Boolean(showState.showEmpty) && <div>empty</div>} */}
+      {Boolean(showState.showEmpty) && <div>empty</div>}
 
       {/* {Boolean(showState.showError) && <div>error</div>} */}
 
@@ -160,15 +147,7 @@ export function NoticeListView() {
         </Table>
       )}
 
-      <JustifyPanel
-        bside={
-          <Button asChild>
-            <Link prefetch={false} href="/notice/create">
-              글쓰기
-            </Link>
-          </Button>
-        }
-      >
+      <JustifyPanel>
         <ListPagination
           page={formValues.page}
           size={formValues.size}

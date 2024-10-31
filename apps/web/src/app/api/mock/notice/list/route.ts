@@ -22,7 +22,7 @@ export function GET(request: NextRequest) {
     list = Array.from(Array(10)).map(() => {
       return {
         id: getRandomInt(1, 99999),
-        title: getRandomText(3, 10),
+        title: `랜덤 ${getRandomText(3, 10)}`,
         content: getRandomText(3, 20),
         author: getRandomText(1, 2),
         date: getRandomDateYMD(),

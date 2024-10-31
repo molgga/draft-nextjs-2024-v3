@@ -1,7 +1,7 @@
 export interface NoticeListReq {
   page?: number;
   size?: number;
-  searchKeyword?: string;
+  searchText?: string;
 }
 
 export interface NoticeListRes {

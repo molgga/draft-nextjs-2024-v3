@@ -39,6 +39,11 @@ export const createNaviList = (): {
             href: '/notice/list',
           },
           {
+            key: 'notice2',
+            title: '게시판2',
+            href: '/notice2/list',
+          },
+          {
             key: 'sample-modal',
             title: '모달',
             href: '/sample/modal',
