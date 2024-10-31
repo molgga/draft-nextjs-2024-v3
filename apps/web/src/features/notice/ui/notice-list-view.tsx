@@ -3,15 +3,16 @@ import Link from 'next/link';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@ui/components/ui/table';
+import { Button } from '@ui/components/ui/button';
 import { useQueryNoticeList } from '@web/features/notice/hooks/use-query-notice';
 import { useLayoutActiveEffect } from '@web/features/layout/hook/use-layout-active-effect';
-import { AlignPanel } from '@web/shared/ui/panel/align-panel';
+import { JustifyPanel } from '@web/widgets/panel/justify-panel';
+import { ListPagination } from '@web/widgets/pagination/list-pagination';
 
 export function NoticeListView() {
   useLayoutActiveEffect('notice');
@@ -21,6 +22,10 @@ export function NoticeListView() {
 
   const { data: { list: noticeList = [], total: noticeTotal = 0 } = {} } =
     useQueryNoticeList({ ...formMethods.getValues() }, isEnabled);
+
+  const handlePaging = (page: number) => {
+    console.log('handlePaging', page);
+  };
 
   return (
     <div>
@@ -45,13 +50,26 @@ export function NoticeListView() {
         </TableBody>
       </Table>
 
-      <div>
-        <Link prefetch={false} href="/notice/create">
-          글쓰기
-        </Link>
-      </div>
-
-      <AlignPanel>1</AlignPanel>
+      <JustifyPanel
+        bside={
+          <Button asChild>
+            <Link prefetch={false} href="/notice/create">
+              글쓰기
+            </Link>
+          </Button>
+        }
+      >
+        <ListPagination
+          page={1}
+          size={10}
+          total={noticeTotal}
+          range={5}
+          toHref={({ paging }) => `/notice/list?page=${paging}`}
+          onPaging={handlePaging}
+          onPagingPrev={handlePaging}
+          onPagingNext={handlePaging}
+        />
+      </JustifyPanel>
     </div>
   );
 }

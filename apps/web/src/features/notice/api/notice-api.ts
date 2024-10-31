@@ -13,9 +13,10 @@ import type {
  */
 export const getNoticeList = async (params: NoticeListReq) => {
   console.log('getNoticeList', params);
+  const { page } = params;
   const url = `http://localhost:3000/api/mock/notice/list`;
   const response = await fetchClient<NoticeListRes>(
-    { url },
+    { url, params: { page } },
     {
       method: FetchMethod.GET,
       cache: FetchCache.NoStore,

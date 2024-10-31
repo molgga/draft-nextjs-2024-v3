@@ -21,7 +21,7 @@ import { Input } from '@ui/components/ui/input';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FullPanel } from '@web/shared/ui/panel/full-center-panel';
+import { FullPanel } from '@web/widgets/panel/full-center-panel';
 import { useQueryLogin } from '../hooks/use-query-login';
 
 const loginScheme = z.object({

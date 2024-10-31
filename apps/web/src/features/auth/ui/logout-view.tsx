@@ -2,7 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import { useEffect } from 'react';
-import { FullPanel } from '@web/shared/ui/panel/full-center-panel';
+import { FullPanel } from '@web/widgets/panel/full-center-panel';
 
 interface LoginViewProps {
   referer?: string;

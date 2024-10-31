@@ -3,7 +3,7 @@
 import { ErrorBox } from '@web/features/error/ui/error-box';
 import { ErrorDigestCode } from '@web/features/error/utils';
 import { FullContentLayout } from '@web/features/layout/ui/composition/full-content-layout';
-import { FullPanel } from '@web/shared/ui/panel/full-center-panel';
+import { FullPanel } from '@web/widgets/panel/full-center-panel';
 
 type ErrorInstance = Error & {
   message?: string;

@@ -1,4 +1,4 @@
-import { TestUiBox1 } from '@web/shared/ui/test-ui-box1';
+import { TestUiBox1 } from '@web/widgets/test-ui-box1';
 
 export default function Page() {
   return (
