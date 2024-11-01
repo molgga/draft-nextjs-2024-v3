@@ -3,7 +3,6 @@
  */
 export interface QueryMetaVo {
   requireAuthModal?: boolean; // true = 에러일 때 로그인 모달 열지 여부
-
   disableGlobalErrorHandler?: boolean; // 전역 에러 핸들러 처리 안하기(직접 핸들링)
   globalErrorTitle?: string;
   globalErrorMessage?: string;
@@ -36,6 +35,11 @@ export enum FetchMethod {
   HEAD = 'HEAD',
 }
 
+// https://nextjs.org/docs/app/building-your-application/caching
+// https://github.com/vercel/next.js/issues/57632
+// https://github.com/vercel/next.js/issues/55960
+// @TODO - next.config.js { experimental: { staleTimes }} 캐싱 관련 설정값 확인 필요
+// @TODO - 15 버전에서는 기본 캐싱 안걸리게 바뀐다는것 같은데 문서 찾아보기
 export enum FetchCache {
   ForceCache = 'force-cache', // 캐싱 한다.
   NoStore = 'no-store', // 캐싱 안한다.

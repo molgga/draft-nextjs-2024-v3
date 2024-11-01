@@ -11,9 +11,10 @@ export function AuthSessionProvider({
   session,
   children,
 }: AuthSessionProviderProps) {
+  // SessionProvider 는 RCC 에서만 사용 가능한 것으로 보임 (getServerSession 는 RSC 에서만 사용 가능)
   return (
     <SessionProvider
-      session={session} // null 을 주지 않으면 session 을 2번 체크 하는것 같은데.. 확인 중
+      session={session}
       refetchInterval={0}
       refetchOnWindowFocus={false}
       refetchWhenOffline={false}

@@ -7,6 +7,9 @@ import type {
 import { FetchMethod, FetchCache } from '@web/shared/api/types';
 import { throwErrorResponse, toSuccessResponse } from './fetch-client-utils';
 
+/**
+ * @TODO - fetch 써보면서 정리 필요
+ */
 export const fetchClient = async <T>(
   config: RequestConfig,
   init?: RequestInit
