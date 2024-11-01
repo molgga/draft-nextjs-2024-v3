@@ -7,5 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  console.log('brand page');
   return <BrandView />;
 }

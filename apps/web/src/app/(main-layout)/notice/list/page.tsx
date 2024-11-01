@@ -4,6 +4,6 @@ import { NoticeListView } from '@web/features/notice/ui/notice-list-view';
 // export const revalidate = 30;
 
 export default function Page() {
-  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@ notice list page');
+  console.log('notice list page');
   return <NoticeListView />;
 }

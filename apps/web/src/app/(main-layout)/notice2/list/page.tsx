@@ -15,7 +15,7 @@ interface PageProps {
 }
 
 export default async function Page({ searchParams }: PageProps) {
-  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@ notice list page2');
+  console.log('notice list page2');
   const page = Number(searchParams.page) || 1;
   const size = Number(searchParams.size) || 10;
   const searchText = (searchParams.searchText || '').toString();

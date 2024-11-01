@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: AppRouterPageProps<'id'>) {
 }
 
 export default async function Page({ params }: AppRouterPageProps<'id'>) {
-  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@ notice page');
+  console.log('notice detail page');
   const id = params?.id;
   const response = await getNoticeDetail({ id });
   return (
