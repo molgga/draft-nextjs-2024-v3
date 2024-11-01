@@ -67,7 +67,7 @@ export const createNaviList = (): {
         list: [
           {
             key: 'sample-error-a',
-            title: '에러 root',
+            title: '에러 layout + error.tsx',
             href: '/sample/error-a',
           },
           {

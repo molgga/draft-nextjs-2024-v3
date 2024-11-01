@@ -9,7 +9,7 @@ export function DefaultErrorPage(props: ErrorPageProps) {
 
   return (
     <FullPanel>
-      <ErrorBox />
+      <ErrorBox {...props} />
     </FullPanel>
   );
 }
