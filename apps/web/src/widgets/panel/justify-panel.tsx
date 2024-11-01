@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { forwardRef } from 'react';
 
 interface JustifyPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   aside?: React.ReactNode;

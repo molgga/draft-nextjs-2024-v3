@@ -128,6 +128,9 @@ export function NoticeListView() {
               <div className="ui-ml-1">indicate loading: 목록이 있을때</div>
             )}
           </div>
+          <div className="ui-p-2 ui-text-xs ui-text-gray-800">
+            검색어 - empty: 빈목록, error: API 오류
+          </div>
         </form>
       </Form>
 

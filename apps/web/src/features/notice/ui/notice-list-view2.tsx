@@ -124,6 +124,9 @@ export function NoticeListView2({ list, total }: NoticeListView2Props) {
               </div>
             )}
           </div>
+          <div className="ui-p-2 ui-text-xs ui-text-gray-800">
+            검색어 - empty: 빈목록, error: API 오류
+          </div>
         </form>
       </Form>
 

@@ -67,12 +67,12 @@ export const createNaviList = (): {
         list: [
           {
             key: 'sample-error-a',
-            title: '서버 컴포넌트 에러',
+            title: '에러 root',
             href: '/sample/error-a',
           },
           {
             key: 'sample-error-b',
-            title: '클라이언트 에러 + 바운더리',
+            title: '에러 page + error.tsx',
             href: '/sample/error-b',
           },
           {
