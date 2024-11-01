@@ -14,6 +14,7 @@ export function useQueryNoticeList(params: NoticeListReq, enabled = true) {
     queryFn: () => NoticeApi.getNoticeList(params),
     placeholderData: keepPreviousData,
     enabled,
+    throwOnError: true,
     select: (data) => {
       const { total, list } = data.data || {};
       return {

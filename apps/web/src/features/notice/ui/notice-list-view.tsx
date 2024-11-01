@@ -31,7 +31,8 @@ export function NoticeListView() {
   console.log('NoticeListView');
   useLayoutActiveEffect('notice');
 
-  const { searchParams, updateQuery } = useSearchQuery<SearchFormSchema>();
+  const { searchParams, updateSearchQuery, onSearchQueryChange } =
+    useSearchQuery<SearchFormSchema>();
 
   const getRouteQueries = useCallback(() => {
     const page = Number(searchParams.get('page')) || 1;
@@ -82,8 +83,15 @@ export function NoticeListView() {
   };
 
   const submit = () => {
-    updateQuery(formMethods.getValues());
+    updateSearchQuery(formMethods.getValues());
   };
+
+  onSearchQueryChange(() => {
+    const { searchText, page, size } = getRouteQueries();
+    formMethods.setValue('searchText', searchText);
+    formMethods.setValue('page', page);
+    formMethods.setValue('size', size);
+  });
 
   return (
     <div>

@@ -38,7 +38,8 @@ export function NoticeListView2({ list, total }: NoticeListView2Props) {
   const noticeList = list || [];
   const noticeTotal = total || 0;
 
-  const { searchParams, updateQuery } = useSearchQuery<SearchFormSchema>();
+  const { searchParams, updateSearchQuery, onSearchQueryChange } =
+    useSearchQuery<SearchFormSchema>();
 
   const getRouteQueries = useCallback(() => {
     const page = Number(searchParams.get('page')) || 1;
@@ -48,9 +49,7 @@ export function NoticeListView2({ list, total }: NoticeListView2Props) {
   }, [searchParams]);
 
   const formMethods = useForm<SearchFormSchema>({
-    defaultValues: {
-      ...getRouteQueries(),
-    },
+    defaultValues: { ...getRouteQueries() },
   });
 
   const formValues = formMethods.getValues();
@@ -84,8 +83,15 @@ export function NoticeListView2({ list, total }: NoticeListView2Props) {
   };
 
   const submit = () => {
-    updateQuery(formMethods.getValues());
+    updateSearchQuery(formMethods.getValues());
   };
+
+  onSearchQueryChange(() => {
+    const { searchText, page, size } = getRouteQueries();
+    formMethods.setValue('searchText', searchText);
+    formMethods.setValue('page', page);
+    formMethods.setValue('size', size);
+  });
 
   return (
     <div>

@@ -1,12 +1,23 @@
+import { useEffect, useMemo, useRef } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+
+interface SearchQueryChangeVo {
+  fullPathname: string;
+}
+
+type SearchQueryChangeCallback = (vo: SearchQueryChangeVo) => void;
 
 export const useSearchQuery = <T = Record<string, unknown>>() => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  // const searchParams = {} as any;
+  const fnSearchQueryChange = useRef<SearchQueryChangeCallback>();
 
-  const updateQuery = (record: T) => {
+  const fullPathname = useMemo(() => {
+    return `${pathname}?${searchParams.toString()}`;
+  }, [pathname, searchParams]);
+
+  const updateSearchQuery = (record: T) => {
     const addRecord: Record<string, string> = {};
     for (const key in record) {
       const v = record[key];
@@ -18,12 +29,23 @@ export const useSearchQuery = <T = Record<string, unknown>>() => {
       ...Object.fromEntries(searchParams),
       ...addRecord,
     }).toString();
-    router.replace(`${pathname}?${queryString}`);
+    router.push(`${pathname}?${queryString}`);
   };
+
+  const onSearchQueryChange = (fn: SearchQueryChangeCallback) => {
+    fnSearchQueryChange.current = fn;
+  };
+
+  useEffect(() => {
+    if (fnSearchQueryChange.current) {
+      fnSearchQueryChange.current({ fullPathname });
+    }
+  }, [fullPathname]);
 
   return {
     pathname,
     searchParams,
-    updateQuery,
+    updateSearchQuery,
+    onSearchQueryChange,
   };
 };
