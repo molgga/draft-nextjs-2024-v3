@@ -157,7 +157,7 @@ export function NoticeListView() {
                 <TableRow key={model.id}>
                   <TableCell className="ui-font-medium">{model.id}</TableCell>
                   <TableCell>
-                    <Link href={`/notice/detail/${model.id}`}>
+                    <Link prefetch={false} href={`/notice/detail/${model.id}`}>
                       {model.title}
                     </Link>
                   </TableCell>
