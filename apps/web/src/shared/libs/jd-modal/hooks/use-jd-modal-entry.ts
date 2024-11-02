@@ -144,7 +144,6 @@ export const useJdModalEntry = (props: JdModalEntryProps) => {
     };
 
     const onChangeOpener = (evt: ModalEvent) => {
-      console.log(evt);
       if (evt.type === ModalEventType.OPENED) {
         if (refModalContainer.current) {
           refModalContainer.current.focus();
