@@ -4,6 +4,7 @@ import { useJdModalRef } from '@web/shared/libs/jd-modal';
 import { JustifyPanel } from '@web/widgets/panel/justify-panel';
 import type { PaymentModalData, PaymentModalResult } from '../types';
 import { useNestedModal } from '../hooks/use-nested-modal';
+import { NestedModal } from './nested-modal';
 
 export function PaymentModal() {
   const modalRef = useJdModalRef<PaymentModalResult, PaymentModalData>();
@@ -30,7 +31,9 @@ export function PaymentModal() {
   };
 
   const handleNestedOpen = () => {
-    nestedModal.open({});
+    nestedModal.open({
+      openTestComponent: <NestedModal />,
+    });
   };
 
   const modalClose = (result?: PaymentModalResult) => {

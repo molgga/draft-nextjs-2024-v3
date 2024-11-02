@@ -14,7 +14,9 @@ export function NestedModal() {
   };
 
   const handleNestedOpen = () => {
-    nestedModal.open({});
+    nestedModal.open({
+      openTestComponent: <NestedModal />,
+    });
   };
 
   const modalClose = (result?: NestedModalResult) => {

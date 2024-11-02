@@ -6,6 +6,9 @@ export interface PaymentModalData {
 export interface PaymentModalResult {
   testResult?: string;
 }
-export interface NestedModalData {}
+
+export interface NestedModalData {
+  openTestComponent: React.ReactNode;
+}
 
 export interface NestedModalResult {}
