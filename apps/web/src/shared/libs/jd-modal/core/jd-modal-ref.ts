@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import { Subject } from 'rxjs';
-import { StackNormal, type OpenStrategy } from '../composition/open-strategy';
+import { StackNormal, type OpenStrategy } from '../module/open-strategy';
 import {
   ModalEventType,
   type ModalEvent,
