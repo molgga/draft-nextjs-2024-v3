@@ -8,6 +8,8 @@ import { useNestedModal } from '../hooks/use-nested-modal';
 export function NestedModal() {
   const modalRef = useJdModalRef<NestedModalResult, NestedModalData>();
   const nestedModal = useNestedModal();
+  // const beforeLeave = useJdModalBeforeLeave();
+  // beforeLeave.onPrevent(() => true);
 
   const handleClose = () => {
     modalClose();
