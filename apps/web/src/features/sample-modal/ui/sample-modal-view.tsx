@@ -1,23 +1,23 @@
 'use client';
 import { Button } from '@ui/components/ui/button';
-import { useSampleModalA } from '@web/features/sample/hooks/use-sample-modal-a';
 import {
   PageActiveKey,
   useLayoutActiveEffect,
 } from '@web/features/layout/hook/use-layout-active-effect';
+import { usePaymentModal } from '@web/features/sample-modal/hooks/use-payment-modal';
 
-export function ModalTestView() {
-  console.log('ModalTestView');
+export function SampleModalView() {
+  console.log('SampleModalView');
   useLayoutActiveEffect(PageActiveKey.SampleModal);
 
-  const modalA = useSampleModalA();
+  const paymentModal = usePaymentModal();
 
   const handleOpenModal = () => {
-    modalA.open({ testPass: new Date().toLocaleString() });
+    paymentModal.open({ testPass: new Date().toLocaleString() });
   };
 
-  modalA.onClosed((result) => {
-    console.log('modalA onClosed:', result);
+  paymentModal.onClosed((result) => {
+    console.log('paymentModal onClosed:', result);
   });
 
   return (

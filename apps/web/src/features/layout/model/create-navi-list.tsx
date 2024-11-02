@@ -58,6 +58,16 @@ export const createNaviList = (): {
             title: '테스트 페이지 B',
             href: '/promotion/b',
           },
+          {
+            key: 'sample-rhf-1',
+            title: 'RHF + zod 1',
+            href: '/sample/rhf/ex1',
+          },
+          {
+            key: 'sample-rhf-2',
+            title: 'RHF + zod 2',
+            href: '/sample/rhf/ex2',
+          },
         ],
       },
       {
