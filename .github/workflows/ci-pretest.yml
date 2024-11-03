@@ -20,18 +20,8 @@ jobs:
 
       - uses: pnpm/action-setup@v4 # package.json 의 packageManager 버전 사용
 
-      # cache를 복원만 한다. (actions/cache/restore@v4)
-      - name: Cache restore
-        id: cache-restore-node-modules
-        uses: actions/cache/restore@v4
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
-
       # install dependencies
-      # 복원된 캐시가 없으면 인스톨
       - name: Install dependencies
-        if: steps.cache-restore-node-modules.outputs.cache-hit != 'true'
         run: pnpm run ci:bootstrap
 
       # 테스트: 타입 체크
