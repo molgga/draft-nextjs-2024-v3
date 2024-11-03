@@ -9,7 +9,7 @@
     "web:test:unit": "pnpm --filter web test:unit",
     "web:test:lint": "pnpm --filter web test:lint",
     "web:test:type": "pnpm --filter web test:type",
-    "ci:bootstrap": "pnpm install",
+    "ci:bootstrap": "pnpm install --frozen-lockfile",
     "ci:all-test-unit": "pnpm run web:test:unit",
     "ci:all-test-lint": "pnpm run web:test:lint",
     "ci:all-test-type": "pnpm run web:test:type"
