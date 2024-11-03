@@ -21,7 +21,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 9
 
       # cache를 복원만 한다. (actions/cache/restore@v4)
       - name: Cache restore

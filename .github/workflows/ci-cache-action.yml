@@ -20,7 +20,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 9
 
       # https://github.com/actions/cache#creating-a-cache-key
       - name: Cache
