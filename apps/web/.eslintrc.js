@@ -3,6 +3,9 @@ module.exports = {
     NodeJS: true,
   },
   extends: ['@repo/eslint-config/next.js'],
+  parserOptions: {
+    project: true,
+  },
   rules: {
     'import/no-named-as-default': 'off',
     'no-console': 'off',

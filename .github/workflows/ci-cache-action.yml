@@ -1,0 +1,32 @@
+name: CI Cache
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # node_modules 를 cache 한다.
+  cache-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set node version to 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # https://github.com/actions/cache#creating-a-cache-key
+      - name: Cache
+        id: cache-restore-node-modules
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      # install dependencies
+      # restore 된 cache 가 없다면 install 한다.
+      - name: Install dependencies
+        if: steps.cache-restore-node-modules.outputs.cache-hit != 'true'
+        run: pnpm run ci:bootstrap

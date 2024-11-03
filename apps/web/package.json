@@ -6,9 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "type-check": "tsc --noEmit",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "test:lint": "next lint",
+    "test:type": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
