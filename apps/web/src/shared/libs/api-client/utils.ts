@@ -1,4 +1,4 @@
-import type { QueryMetaVo } from './types';
+import type { QueryMetaVo } from "./types";
 
 /**
  * tanstack-query meta 타입 처리

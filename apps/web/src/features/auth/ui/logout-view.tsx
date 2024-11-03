@@ -1,8 +1,8 @@
-'use client';
-import { useSearchParams } from 'next/navigation';
-import { signOut } from 'next-auth/react';
-import { useEffect } from 'react';
-import { FullPanel } from '@web/widgets/panel/full-center-panel';
+"use client";
+import { useSearchParams } from "next/navigation";
+import { signOut } from "next-auth/react";
+import { useEffect } from "react";
+import { FullPanel } from "@web/shared/ui/panel/full-center-panel";
 
 interface LoginViewProps {
   referer?: string;
@@ -11,14 +11,14 @@ interface LoginViewProps {
 export function LogoutView({ referer }: LoginViewProps) {
   const searchParams = useSearchParams();
   let callbackUrl = decodeURIComponent(
-    searchParams.get('callbackUrl') || referer || '/'
+    searchParams.get("callbackUrl") || referer || "/",
   );
 
   if (
-    callbackUrl.includes('/auth/login') ||
-    callbackUrl.includes('/auth/logout')
+    callbackUrl.includes("/auth/login") ||
+    callbackUrl.includes("/auth/logout")
   ) {
-    callbackUrl = '/';
+    callbackUrl = "/";
   }
 
   useEffect(() => {

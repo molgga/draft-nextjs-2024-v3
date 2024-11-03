@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import clsx from "clsx";
 
 interface JustifyPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   aside?: React.ReactNode;
@@ -22,21 +22,21 @@ export function JustifyPanel({ className, ...props }: JustifyPanelProps) {
 
   return (
     <div
-      className={clsx('ui-flex ui-mt-4 ui-items-center', className)}
+      className={clsx("ui-flex ui-mt-4 ui-items-center", className)}
       {...attrs}
     >
-      <div className={clsx('ui-flex ui-justify-start', `ui-flex-${asideFlex}`)}>
+      <div className={clsx("ui-flex ui-justify-start", `ui-flex-${asideFlex}`)}>
         {aside}
       </div>
       <div
         className={clsx(
-          'ui-flex ui-flex ui-justify-center',
-          `ui-flex-${centerFlex}`
+          "ui-flex ui-flex ui-justify-center",
+          `ui-flex-${centerFlex}`,
         )}
       >
         {children}
       </div>
-      <div className={clsx('ui-flex ui-justify-end', `ui-flex-${bsideFlex}`)}>
+      <div className={clsx("ui-flex ui-justify-end", `ui-flex-${bsideFlex}`)}>
         {bside}
       </div>
     </div>

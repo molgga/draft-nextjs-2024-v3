@@ -1,9 +1,9 @@
-import { X as IconClose } from 'lucide-react';
-import { Button } from '@ui/components/ui/button';
-import { useJdModalRef } from '@web/shared/libs/jd-modal';
-import { JustifyPanel } from '@web/widgets/panel/justify-panel';
-import type { NestedModalData, NestedModalResult } from '../types';
-import { useNestedModal } from '../hooks/use-nested-modal';
+import { X as IconClose } from "lucide-react";
+import { Button } from "@ui/components/ui/button";
+import { useJdModalRef } from "@web/shared/libs/jd-modal";
+import { JustifyPanel } from "@web/shared/ui/panel/justify-panel";
+import type { NestedModalData, NestedModalResult } from "../types";
+import { useNestedModal } from "../hooks/use-nested-modal";
 
 export function NestedModal() {
   const modalRef = useJdModalRef<NestedModalResult, NestedModalData>();

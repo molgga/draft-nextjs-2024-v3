@@ -1,18 +1,18 @@
-import type { RequestInit } from 'next/dist/server/web/spec-extension/request';
+import type { RequestInit } from "next/dist/server/web/spec-extension/request";
 import type {
   RequestConfig,
   FetchResponse,
   URLSearchParamsType,
-} from '@web/shared/api/types';
-import { FetchMethod, FetchCache } from '@web/shared/api/types';
-import { throwErrorResponse, toSuccessResponse } from './fetch-client-utils';
+} from "@web/shared/libs/api-client/types";
+import { FetchMethod, FetchCache } from "@web/shared/libs/api-client/types";
+import { throwErrorResponse, toSuccessResponse } from "./fetch-client-utils";
 
 /**
  * @TODO - fetch 써보면서 정리 필요
  */
 export const fetchClient = async <T>(
   config: RequestConfig,
-  init?: RequestInit
+  init?: RequestInit,
 ): Promise<FetchResponse<T>> => {
   const { url, params, body } = config;
   const method = init?.method || FetchMethod.GET;
@@ -21,9 +21,9 @@ export const fetchClient = async <T>(
   if (method.toUpperCase() === FetchMethod.GET.toString()) {
     const queryString = params
       ? new URLSearchParams(params as URLSearchParamsType).toString()
-      : '';
+      : "";
     if (queryString) {
-      requestUrl = url.includes('?')
+      requestUrl = url.includes("?")
         ? `${url}&${queryString}`
         : `${url}?${queryString}`;
     }

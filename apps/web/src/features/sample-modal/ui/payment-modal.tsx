@@ -1,10 +1,10 @@
-import { X as IconClose } from 'lucide-react';
-import { Button } from '@ui/components/ui/button';
-import { useJdModalRef } from '@web/shared/libs/jd-modal';
-import { JustifyPanel } from '@web/widgets/panel/justify-panel';
-import type { PaymentModalData, PaymentModalResult } from '../types';
-import { useNestedModal } from '../hooks/use-nested-modal';
-import { NestedModal } from './nested-modal';
+import { X as IconClose } from "lucide-react";
+import { Button } from "@ui/components/ui/button";
+import { useJdModalRef } from "@web/shared/libs/jd-modal";
+import { JustifyPanel } from "@web/shared/ui/panel/justify-panel";
+import type { PaymentModalData, PaymentModalResult } from "../types";
+import { useNestedModal } from "../hooks/use-nested-modal";
+import { NestedModal } from "./nested-modal";
 
 export function PaymentModal() {
   const modalRef = useJdModalRef<PaymentModalResult, PaymentModalData>();
@@ -13,7 +13,7 @@ export function PaymentModal() {
   const viewState = (() => {
     const { title, testPass } = modalRef.data || {};
     return {
-      modalTitle: title || 'Title',
+      modalTitle: title || "Title",
       modalPassData: testPass,
     };
   })();
@@ -23,11 +23,11 @@ export function PaymentModal() {
   };
 
   const handleCancel = () => {
-    modalClose({ testResult: 'cancel!' });
+    modalClose({ testResult: "cancel!" });
   };
 
   const handleSave = () => {
-    modalClose({ testResult: 'saved!' });
+    modalClose({ testResult: "saved!" });
   };
 
   const handleNestedOpen = () => {

@@ -1,7 +1,7 @@
-import { toPagination } from '../to-pagination';
+import { toPagination } from "../to-pagination";
 
-describe('페이지네이션 테스트', () => {
-  test('페이징 테스트 1', () => {
+describe("페이지네이션 테스트", () => {
+  test("페이징 테스트 1", () => {
     const result = toPagination({ page: 1, size: 10, total: 33 });
     expect(result.rangeStart).toBe(1);
     expect(result.rangeEnd).toBe(4);
@@ -15,7 +15,7 @@ describe('페이지네이션 테스트', () => {
     expect(result.expectNextJump).toBe(4);
   });
 
-  test('페이징 테스트 2', () => {
+  test("페이징 테스트 2", () => {
     const result = toPagination({ page: 2, size: 10, total: 33 });
     expect(result.rangeStart).toBe(1);
     expect(result.rangeEnd).toBe(4);
@@ -29,7 +29,7 @@ describe('페이지네이션 테스트', () => {
     expect(result.expectNextJump).toBe(4);
   });
 
-  test('페이징 테스트 3', () => {
+  test("페이징 테스트 3", () => {
     const result = toPagination({ page: 4, size: 10, total: 33 });
     expect(result.rangeStart).toBe(1);
     expect(result.rangeEnd).toBe(4);
@@ -43,7 +43,7 @@ describe('페이지네이션 테스트', () => {
     expect(result.expectNextJump).toBe(4);
   });
 
-  test('페이징 테스트 4', () => {
+  test("페이징 테스트 4", () => {
     const result = toPagination({ page: 4, size: 10, total: 155 });
     expect(result.rangeStart).toBe(1);
     expect(result.rangeEnd).toBe(10);
@@ -57,7 +57,7 @@ describe('페이지네이션 테스트', () => {
     expect(result.expectNextJump).toBe(16);
   });
 
-  test('페이징 테스트 5', () => {
+  test("페이징 테스트 5", () => {
     const result = toPagination({ page: 10, size: 10, total: 155 });
     expect(result.rangeStart).toBe(1);
     expect(result.rangeEnd).toBe(10);
@@ -71,7 +71,7 @@ describe('페이지네이션 테스트', () => {
     expect(result.expectNextJump).toBe(16);
   });
 
-  test('페이징 테스트 6', () => {
+  test("페이징 테스트 6", () => {
     const result = toPagination({ page: 11, size: 10, total: 155 });
     expect(result.rangeStart).toBe(11);
     expect(result.rangeEnd).toBe(16);
@@ -85,7 +85,7 @@ describe('페이지네이션 테스트', () => {
     expect(result.expectNextJump).toBe(16);
   });
 
-  test('페이징 테스트 7', () => {
+  test("페이징 테스트 7", () => {
     const result = toPagination({ page: 16, size: 10, total: 155 });
     expect(result.rangeStart).toBe(11);
     expect(result.rangeEnd).toBe(16);
@@ -99,7 +99,7 @@ describe('페이지네이션 테스트', () => {
     expect(result.expectNextJump).toBe(16);
   });
 
-  test('페이징 테스트 8', () => {
+  test("페이징 테스트 8", () => {
     const result = toPagination({ page: 16, size: 10, total: 234 });
     expect(result.rangeStart).toBe(11);
     expect(result.rangeEnd).toBe(20);

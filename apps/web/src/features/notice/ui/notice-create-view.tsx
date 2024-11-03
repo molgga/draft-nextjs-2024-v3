@@ -1,8 +1,8 @@
-'use client';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
+"use client";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
@@ -10,41 +10,41 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@ui/components/ui/form';
-import { Input } from '@ui/components/ui/input';
-import { Button } from '@ui/components/ui/button';
-import { Checkbox } from '@ui/components/ui/checkbox';
-import { useLayoutActiveEffect } from '@web/features/layout/hook/use-layout-active-effect';
-import { useQueryNoticeCreate } from '@web/features/notice/hooks/use-query-notice';
-import { JustifyPanel } from '@web/widgets/panel/justify-panel';
+} from "@ui/components/ui/form";
+import { Input } from "@ui/components/ui/input";
+import { Button } from "@ui/components/ui/button";
+import { Checkbox } from "@ui/components/ui/checkbox";
+import { useLayoutActiveEffect } from "@web/features/layout/hook/use-layout-active-effect";
+import { useQueryNoticeCreate } from "@web/features/notice/hooks/use-query-notice";
+import { JustifyPanel } from "@web/shared/ui/panel/justify-panel";
 
 const wirteFormSchema = z.object({
   title: z
     .string()
-    .min(1, '타이틀을 입력하세요')
-    .min(3, '최소 3글자 이상 입력하세요.')
-    .max(50, '최대 50자 까지 입력이 가능합니다.'),
+    .min(1, "타이틀을 입력하세요")
+    .min(3, "최소 3글자 이상 입력하세요.")
+    .max(50, "최대 50자 까지 입력이 가능합니다."),
   content: z
     .string()
-    .min(1, '내용을 입력하세요')
-    .min(3, '최소 3글자 이상 입력하세요.')
-    .max(3000, '최대 3,000자 까지 입력이 가능합니다.'),
+    .min(1, "내용을 입력하세요")
+    .min(3, "최소 3글자 이상 입력하세요.")
+    .max(3000, "최대 3,000자 까지 입력이 가능합니다."),
   isAgree: z.boolean().refine((v) => v, {
-    message: '동의 필수',
+    message: "동의 필수",
   }),
 });
 
 type WriteFormSchema = z.infer<typeof wirteFormSchema>;
 
 export function NoticeCreateView() {
-  console.log('notice-create-view');
-  useLayoutActiveEffect('notice');
+  console.log("notice-create-view");
+  useLayoutActiveEffect("notice");
 
   const formMethods = useForm<WriteFormSchema>({
     resolver: zodResolver(wirteFormSchema),
     defaultValues: {
-      title: '',
-      content: '',
+      title: "",
+      content: "",
       isAgree: false,
     },
   });
@@ -60,9 +60,9 @@ export function NoticeCreateView() {
       title,
       content,
     });
-    console.log('response:', data, error);
+    console.log("response:", data, error);
     if (!error) {
-      router.push('/notice/list');
+      router.push("/notice/list");
     }
   };
 

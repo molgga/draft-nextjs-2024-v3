@@ -1,4 +1,8 @@
-import { FetchCache, fetchClient, FetchMethod } from '@web/shared/api';
+import {
+  FetchCache,
+  fetchClient,
+  FetchMethod,
+} from "@web/shared/libs/api-client";
 import type {
   NoticeCreateReq,
   NoticeCreateRes,
@@ -6,13 +10,13 @@ import type {
   NoticeDetailRes,
   NoticeListReq,
   NoticeListRes,
-} from '@web/features/notice/types';
+} from "@web/features/notice/types";
 
 /**
  * 공지사항 목록 가져오기
  */
 export const getNoticeList = async (params: NoticeListReq) => {
-  console.log('getNoticeList', params);
+  console.log("getNoticeList", params);
   const url = `http://localhost:3000/api/mock/notice/list`;
   const response = await fetchClient<NoticeListRes>(
     { url, params: { ...params } },
@@ -20,7 +24,7 @@ export const getNoticeList = async (params: NoticeListReq) => {
       method: FetchMethod.GET,
       cache: FetchCache.NoStore,
       // next: { revalidate: 1 },
-    }
+    },
   );
   return response;
 };
@@ -36,7 +40,7 @@ export const getNoticeDetail = async (params: NoticeDetailReq) => {
     {
       method: FetchMethod.GET,
       next: { revalidate: 1 },
-    }
+    },
   );
   return response;
 };
@@ -45,7 +49,7 @@ export const getNoticeDetail = async (params: NoticeDetailReq) => {
  * 공지사항 쓰기
  */
 export const createNotice = async (params: NoticeCreateReq) => {
-  console.log('createNotice', params);
+  console.log("createNotice", params);
   const url = `http://localhost:3000/api/mock/notice/create`;
   const response = await fetchClient<NoticeCreateRes>(
     { url, body: JSON.stringify(params) },
@@ -53,7 +57,7 @@ export const createNotice = async (params: NoticeCreateReq) => {
       method: FetchMethod.POST,
       cache: FetchCache.NoStore,
       // next: { revalidate: 1 },
-    }
+    },
   );
   return response;
 };

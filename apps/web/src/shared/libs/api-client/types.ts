@@ -27,12 +27,12 @@ export interface RequestConfig {
 }
 
 export enum FetchMethod {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  PATCH = 'PATCH',
-  DELETE = 'DELETE',
-  HEAD = 'HEAD',
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  PATCH = "PATCH",
+  DELETE = "DELETE",
+  HEAD = "HEAD",
 }
 
 // https://nextjs.org/docs/app/building-your-application/caching
@@ -41,11 +41,11 @@ export enum FetchMethod {
 // @TODO - next.config.js { experimental: { staleTimes }} 캐싱 관련 설정값 확인 필요
 // @TODO - 15 버전에서는 기본 캐싱 안걸리게 바뀐다는것 같은데 문서 찾아보기
 export enum FetchCache {
-  ForceCache = 'force-cache', // 캐싱 한다.
-  NoStore = 'no-store', // 캐싱 안한다.
-  NoCache = 'no-cache',
-  OnlyIfCached = 'only-if-cached',
-  Reload = 'reload',
+  ForceCache = "force-cache", // 캐싱 한다.
+  NoStore = "no-store", // 캐싱 안한다.
+  NoCache = "no-cache",
+  OnlyIfCached = "only-if-cached",
+  Reload = "reload",
 }
 export interface FetchResponse<D, E = FetchErrorVo> {
   data?: D | null;

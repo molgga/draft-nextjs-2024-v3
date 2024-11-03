@@ -1,7 +1,7 @@
-'use client';
-import { ErrorBox } from '@web/features/error/ui/error-box';
-import { FullContentLayout } from '@web/features/layout/ui/composition/full-content-layout';
-import { FullPanel } from '@web/widgets/panel/full-center-panel';
+"use client";
+import { ErrorBox } from "@web/features/error/ui/error-box";
+import { FullContentLayout } from "@web/features/layout/ui/composition/full-content-layout";
+import { FullPanel } from "@web/shared/ui/panel/full-center-panel";
 
 export default function NotFound() {
   return (

@@ -1,14 +1,14 @@
-'use client';
-import { useSearchParams } from 'next/navigation';
-import { Loader2 as IconPending } from 'lucide-react';
-import { Button } from '@ui/components/ui/button';
+"use client";
+import { useSearchParams } from "next/navigation";
+import { Loader2 as IconPending } from "lucide-react";
+import { Button } from "@ui/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@ui/components/ui/card';
+} from "@ui/components/ui/card";
 import {
   Form,
   FormControl,
@@ -16,39 +16,39 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@ui/components/ui/form';
-import { Input } from '@ui/components/ui/input';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FullPanel } from '@web/widgets/panel/full-center-panel';
-import { useQueryLogin } from '../hooks/use-query-login';
+} from "@ui/components/ui/form";
+import { Input } from "@ui/components/ui/input";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FullPanel } from "@web/shared/ui/panel/full-center-panel";
+import { useQueryLogin } from "../hooks/use-query-login";
 
 const loginScheme = z.object({
-  username: z.string().min(1, '아이디를 입력하세요.'),
-  password: z.string().min(1, '비밀번호를 입력하세요.'),
+  username: z.string().min(1, "아이디를 입력하세요."),
+  password: z.string().min(1, "비밀번호를 입력하세요."),
 });
 
 type LoginScheme = z.infer<typeof loginScheme>;
 
 export default function LoginView() {
-  console.log('LoginView');
+  console.log("LoginView");
   const actionLogin = useQueryLogin();
   const searchParams = useSearchParams();
   const callbackUrl = decodeURIComponent(
-    searchParams.get('callbackUrl') || '/'
+    searchParams.get("callbackUrl") || "/",
   );
 
   const loginForm = useForm<LoginScheme>({
     resolver: zodResolver(loginScheme),
     defaultValues: {
-      username: 'testuser',
-      password: 'test1234$#@!',
+      username: "testuser",
+      password: "test1234$#@!",
     },
   });
 
   const onSubmit = async (payload: LoginScheme) => {
-    console.log('login start');
+    console.log("login start");
     const { username, password } = payload;
     const result = await actionLogin.mutateAsync({ username, password });
     if (result && result.ok && !result.error) {

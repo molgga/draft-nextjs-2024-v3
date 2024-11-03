@@ -1,4 +1,4 @@
-import type { PaginationConfig, PaginationResult } from './types';
+import type { PaginationConfig, PaginationResult } from "./types";
 
 export const toPagination = (config: PaginationConfig): PaginationResult => {
   const { page, size, total, range = 10 } = config;

@@ -23,7 +23,7 @@ export function toErrorResponse({ status, message }: ErrorProps) {
     data: null,
     error: {
       status: status || 500,
-      message: message || 'Error',
+      message: message || "Error",
     },
   };
 }

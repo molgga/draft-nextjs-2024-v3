@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { ErrorBox } from '@web/features/error/ui/error-box';
-import { ErrorDigestCode } from '@web/features/error/utils';
-import { FullContentLayout } from '@web/features/layout/ui/composition/full-content-layout';
-import { FullPanel } from '@web/widgets/panel/full-center-panel';
+import { ErrorBox } from "@web/features/error/ui/error-box";
+import { ErrorDigestCode } from "@web/features/error/utils";
+import { FullContentLayout } from "@web/features/layout/ui/composition/full-content-layout";
+import { FullPanel } from "@web/shared/ui/panel/full-center-panel";
 
 type ErrorInstance = Error & {
   message?: string;
@@ -15,9 +15,9 @@ interface ErrorPageProps {
 }
 
 export default function ErrorPage({ error }: ErrorPageProps) {
-  console.log('ErrorPage');
+  console.log("ErrorPage");
   if (error.digest === ErrorDigestCode.NotFound) {
-    console.log('#ErrorPage ', ErrorDigestCode.NotFound);
+    console.log("#ErrorPage ", ErrorDigestCode.NotFound);
   }
   return (
     <FullContentLayout>

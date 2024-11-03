@@ -1,7 +1,7 @@
-'use client';
-import { useCallback } from 'react';
-import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+"use client";
+import { useCallback } from "react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
 import {
   Table,
   TableBody,
@@ -9,16 +9,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@ui/components/ui/table';
-import { Form, FormField, FormItem } from '@ui/components/ui/form';
-import { Input } from '@ui/components/ui/input';
-import { Button } from '@ui/components/ui/button';
-import { JustifyPanel } from '@web/widgets/panel/justify-panel';
-import { ListPagination } from '@web/widgets/pagination/list-pagination';
-import { useSearchQuery } from '@web/shared/hook/use-search-query';
-import { useLayoutActiveEffect } from '@web/features/layout/hook/use-layout-active-effect';
-import { PageTitle } from '@web/shared/ui/page-title';
-import type { NoticeItemModel } from '../model/notice-item.model';
+} from "@ui/components/ui/table";
+import { Form, FormField, FormItem } from "@ui/components/ui/form";
+import { Input } from "@ui/components/ui/input";
+import { Button } from "@ui/components/ui/button";
+import { JustifyPanel } from "@web/shared/ui/panel/justify-panel";
+import { ListPagination } from "@web/shared/ui/pagination/list-pagination";
+import { useSearchQuery } from "@web/shared/hook/use-search-query";
+import { useLayoutActiveEffect } from "@web/features/layout/hook/use-layout-active-effect";
+import { PageTitle } from "@web/shared/ui/page-title";
+import type { NoticeItemModel } from "../model/notice-item.model";
 
 interface NoticeListView2Props {
   list?: NoticeItemModel[];
@@ -32,8 +32,8 @@ interface SearchFormSchema {
 }
 
 export function NoticeListView2({ list, total }: NoticeListView2Props) {
-  console.log('NoticeListView');
-  useLayoutActiveEffect('notice');
+  console.log("NoticeListView");
+  useLayoutActiveEffect("notice");
 
   const noticeList = list || [];
   const noticeTotal = total || 0;
@@ -42,9 +42,9 @@ export function NoticeListView2({ list, total }: NoticeListView2Props) {
     useSearchQuery<SearchFormSchema>();
 
   const getRouteQueries = useCallback(() => {
-    const page = Number(searchParams.get('page')) || 1;
-    const size = Number(searchParams.get('size')) || 10;
-    const searchText = searchParams.get('searchText') || '';
+    const page = Number(searchParams.get("page")) || 1;
+    const size = Number(searchParams.get("size")) || 10;
+    const searchText = searchParams.get("searchText") || "";
     return { page, size, searchText };
   }, [searchParams]);
 
@@ -63,22 +63,22 @@ export function NoticeListView2({ list, total }: NoticeListView2Props) {
   })();
 
   const handlePaging = (page: number) => {
-    console.log('handlePaging', page);
-    formMethods.setValue('page', page);
+    console.log("handlePaging", page);
+    formMethods.setValue("page", page);
     submit();
   };
 
   const handleSearchClear = (evt: React.SyntheticEvent) => {
-    console.log('handleSearchClear');
+    console.log("handleSearchClear");
     evt.preventDefault();
-    formMethods.setValue('searchText', '');
-    formMethods.setValue('page', 1);
+    formMethods.setValue("searchText", "");
+    formMethods.setValue("page", 1);
     submit();
   };
 
   const onSubmit = (payload: SearchFormSchema) => {
-    console.log('onSubmit', payload);
-    formMethods.setValue('page', 1);
+    console.log("onSubmit", payload);
+    formMethods.setValue("page", 1);
     submit();
   };
 
@@ -88,9 +88,9 @@ export function NoticeListView2({ list, total }: NoticeListView2Props) {
 
   onSearchQueryChange(() => {
     const { searchText, page, size } = getRouteQueries();
-    formMethods.setValue('searchText', searchText);
-    formMethods.setValue('page', page);
-    formMethods.setValue('size', size);
+    formMethods.setValue("searchText", searchText);
+    formMethods.setValue("page", page);
+    formMethods.setValue("size", size);
   });
 
   return (
