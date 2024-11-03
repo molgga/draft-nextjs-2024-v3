@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import {
   withAuth,
-  createNextAuthAuthrorized,
+  nextAuthAuthrorized,
 } from '@web/middlewares/next-auth-authroized';
 import { middlewareAuth, middlewareLogger } from '@web/middlewares';
 
@@ -23,10 +23,17 @@ export const config = {
  * 두번째 파라미터로 제공하는 옵션(next-auth callback)에서
  * token
  */
-export default withAuth(async (request, fetchEvent) => {
-  const response = NextResponse.next();
-  const params = { request, response, fetchEvent };
-  await middlewareLogger(params);
-  await middlewareAuth(params);
-  return response;
-}, createNextAuthAuthrorized());
+export default withAuth(
+  async (request, fetchEvent) => {
+    const response = NextResponse.next();
+    const params = { request, response, fetchEvent };
+    await middlewareLogger(params);
+    await middlewareAuth(params);
+    return response;
+  },
+  nextAuthAuthrorized({
+    authProtecteds: [/^\/brand/],
+    authPublics: [/^\/api\//, /^\/sample\//, /^\/auth\//],
+    pathLogin: '/auth.login',
+  })
+);

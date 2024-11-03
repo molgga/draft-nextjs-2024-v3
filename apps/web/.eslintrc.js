@@ -26,7 +26,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 1,
     '@typescript-eslint/no-misused-promises': [
       'error',
-      { checksVoidReturn: false },
+      { checksVoidReturn: false, checksSpreads: false },
     ],
   },
 };
