@@ -49,5 +49,3 @@ pnpm commitlint --edit $1 --config commitlint.config.ts
 ```
 # /commitlint.config.ts
 ```
-
-.
