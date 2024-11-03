@@ -4,7 +4,7 @@ interface PageTitleProps {
 
 export function PageTitle({ title }: PageTitleProps) {
   return (
-    <div className="ui-pt-3 ui-pb-8">
+    <div className="ui-pt-3 ui-pb-8" foo="">
       <h1 className="ui-text-lg ui-font-semibold">{title}</h1>
     </div>
   );
