@@ -1,3 +1,5 @@
+import { SampleRhfB } from "@web/features/sample-rhf/ui/sample-rhf-b";
+
 export default function Page() {
-  return <div>react-hook-form + zod 2</div>;
+  return <SampleRhfB />;
 }
