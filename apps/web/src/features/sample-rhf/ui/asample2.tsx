@@ -34,14 +34,14 @@ const testScheme = z.object({
 
 type TestScheme = z.infer<typeof testScheme>;
 
-const CheckList = [
+const CheckSourceList = [
   { label: "체크1", value: "1" },
   { label: "체크2", value: "2" },
   { label: "체크3", value: "3" },
   { label: "체크4", value: "4" },
 ];
 
-const SelectList = [
+const SelectSourceList = [
   { label: "select 1", value: "1" },
   { label: "select 2", value: "2" },
   { label: "select 3", value: "3" },
@@ -81,7 +81,7 @@ export function Asample2({ ...attrs }: Asample2Props) {
                 name="checkList"
                 render={() => (
                   <FormItem>
-                    {CheckList.map((check) => {
+                    {CheckSourceList.map((check) => {
                       return (
                         <FormField
                           key={check.value}
@@ -161,7 +161,7 @@ export function Asample2({ ...attrs }: Asample2Props) {
                       <SelectContent>
                         <SelectGroup>
                           {/* <SelectLabel>선택</SelectLabel> */}
-                          {SelectList.map((v) => {
+                          {SelectSourceList.map((v) => {
                             return (
                               <SelectItem key={v.value} value={v.value}>
                                 {v.label}
