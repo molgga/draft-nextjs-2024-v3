@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import { Subscription } from 'rxjs';
-import { useJdModalService } from '../provider/use-jd-modal-service';
-import { useJdModalRef } from '../provider/use-jd-modal-ref';
+import { useEffect, useRef, useState } from "react";
+import { Subscription } from "rxjs";
+import { useJdModalService } from "../provider/use-jd-modal-service";
+import { useJdModalRef } from "../provider/use-jd-modal-ref";
 
 interface DragConfig {
   initialize?: boolean; // 자동 초기화
@@ -37,7 +37,9 @@ const createState = () => {
 /**
  * 모달 아래로 드래그 해서 닫기
  */
-export const useJdModalPullDownClose = (config: DragConfig = {}) => {
+export const useJdModalPullDownClose = <T extends HTMLElement>(
+  config: DragConfig = {},
+) => {
   const {
     initialize = true,
     dragResistance = 1,
@@ -48,7 +50,7 @@ export const useJdModalPullDownClose = (config: DragConfig = {}) => {
   const moveEventOptions = { passive: false };
   const modalService = useJdModalService();
   const modalRef = useJdModalRef();
-  const refScrollContainer = useRef<HTMLElement | null>(null);
+  const refScrollContainer = useRef<T | null>(null);
   const refPanelElement = useRef<HTMLElement | null>(null);
   const modalListener = useRef<Subscription | null>(null);
   const [state] = useState<StateType>(() => createState());
@@ -81,10 +83,10 @@ export const useJdModalPullDownClose = (config: DragConfig = {}) => {
       evt.preventDefault();
     }
     if (state.moveIntercepCount > 3) {
-      document.removeEventListener('touchmove', onTouchMoveIntercept);
+      document.removeEventListener("touchmove", onTouchMoveIntercept);
       if (directionX < directionY && moveY > 0) {
         state.startY = clientY;
-        document.addEventListener('touchmove', onTouchMove, moveEventOptions);
+        document.addEventListener("touchmove", onTouchMove, moveEventOptions);
       }
     }
   };
@@ -103,8 +105,8 @@ export const useJdModalPullDownClose = (config: DragConfig = {}) => {
   // document touchend
   const onTouchEnd = () => {
     blindFrameClear();
-    document.removeEventListener('touchmove', onTouchMoveIntercept);
-    document.removeEventListener('touchmove', onTouchMove);
+    document.removeEventListener("touchmove", onTouchMoveIntercept);
+    document.removeEventListener("touchmove", onTouchMove);
     const { startStamp, moveY } = state;
     const triggerY =
       (triggerReleaseGap - (Date.now() - startStamp)) / triggerReleaseMultiple;
@@ -173,11 +175,11 @@ export const useJdModalPullDownClose = (config: DragConfig = {}) => {
     state.startY = startY;
     state.startStamp = Date.now();
     state.moveIntercepCount = 0;
-    document.removeEventListener('touchmove', onTouchMoveIntercept);
+    document.removeEventListener("touchmove", onTouchMoveIntercept);
     document.addEventListener(
-      'touchmove',
+      "touchmove",
       onTouchMoveIntercept,
-      moveEventOptions
+      moveEventOptions,
     );
   };
 
@@ -207,17 +209,17 @@ export const useJdModalPullDownClose = (config: DragConfig = {}) => {
   // 초기화
   const init = () => {
     refPanelElement.current = modalRef.panelElement;
-    refPanelElement.current.style.transition = 'transform 0ms';
-    document.addEventListener('touchstart', onTouchStart);
-    document.addEventListener('touchend', onTouchEnd);
+    refPanelElement.current.style.transition = "transform 0ms";
+    document.addEventListener("touchstart", onTouchStart);
+    document.addEventListener("touchend", onTouchEnd);
     if (refScrollContainer.current) {
       refScrollContainer.current.addEventListener(
-        'touchmove',
-        onContainerTouchPrevent
+        "touchmove",
+        onContainerTouchPrevent,
       );
       refScrollContainer.current.addEventListener(
-        'touchend',
-        onContainerTouchPrevent
+        "touchend",
+        onContainerTouchPrevent,
       );
     }
     const observe = modalService.observeModalState().subscribe((modalState) => {
@@ -232,18 +234,18 @@ export const useJdModalPullDownClose = (config: DragConfig = {}) => {
   const destroy = () => {
     blindFrameClear();
     releaseFrameClear();
-    document.removeEventListener('touchstart', onTouchStart);
-    document.removeEventListener('touchmove', onTouchMoveIntercept);
-    document.removeEventListener('touchmove', onTouchMove);
-    document.removeEventListener('touchend', onTouchEnd);
+    document.removeEventListener("touchstart", onTouchStart);
+    document.removeEventListener("touchmove", onTouchMoveIntercept);
+    document.removeEventListener("touchmove", onTouchMove);
+    document.removeEventListener("touchend", onTouchEnd);
     if (refScrollContainer.current) {
       refScrollContainer.current.removeEventListener(
-        'touchmove',
-        onContainerTouchPrevent
+        "touchmove",
+        onContainerTouchPrevent,
       );
       refScrollContainer.current.removeEventListener(
-        'touchend',
-        onContainerTouchPrevent
+        "touchend",
+        onContainerTouchPrevent,
       );
     }
     modalListener.current?.unsubscribe();
@@ -251,11 +253,11 @@ export const useJdModalPullDownClose = (config: DragConfig = {}) => {
   };
 
   // 강제로 스크롤 컨테이너를 바꿔야 하는 경우가 있을 때 사용.
-  const setScrollContainer = (element: HTMLElement) => {
+  const setScrollContainer = (element: T) => {
     refScrollContainer.current = element;
   };
 
-  const changeScrollContainer = (element: HTMLElement) => {
+  const changeScrollContainer = (element: T) => {
     if (refScrollContainer.current) {
       destroy();
     }
@@ -276,7 +278,7 @@ export const useJdModalPullDownClose = (config: DragConfig = {}) => {
 function useInitialEffect(
   initialize: boolean,
   init: () => void,
-  destroy: () => void
+  destroy: () => void,
 ) {
   useEffect(() => {
     if (initialize) {
